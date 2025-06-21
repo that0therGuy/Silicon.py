@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <link rel="icon" href="img.png" type="image/x-icon">
+  <title>Settings</title>
+  <link rel="stylesheet" href="css.css">
+  <style>
+
+    .groupb{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap:10px;
+      margin:10px;
+    }
+    @media only screen and (max-width: 600px) {
+      .groupb{
+        flex-direction: column;
+      }
+    }
+    button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      vertical-align: middle;
+    }
+    img{
+      margin:0;
+    }
+
+    a{
+      margin-bottom: 20px;
+    }
+    .container{
+      height:100svh;
+    }
+
+  </style>
+
+</head>
+<body>
+<div class="blur"></div>
+
+<div class="container" style="gap:20px;overflow-y: auto;justify-content:center;">
+  <H1 style="margin-top:10rem;"><span>📜</span> Project Settings</H1>
+  <h5>Downloads:</h5>
+  <div class="groupb">
+    <button class="download_cjs">Download your .py file <img src="d.svg" height="24" width="24"></button>
+  </div>
+
+  <h5>Controls:</h5>
+  <div style="display:flex;align-items: center;justify-content: center;gap:25px;">
+    <button class="dbl">Delete code after double-clicking the Heading</button>
+    <h6 class="dlete">False</h6>
+
+  </div>
+
+  <div style="display:flex;align-items: center;justify-content: center;gap:25px;">
+    <button class="cons">Delete console before running Code</button>
+    <h6 class="consb">False</h6>
+
+
+  </div>
+
+<div style="display:none;align-items: center;justify-content: center;gap:25px;">
+    <button class="auto">Automatic Execution</button>
+    <h6 class="autob">False</h6>
+    <div>
+      <input type="text" class="cooldown" maxlength="2"/>
+      <label style="margin:0;">s</label>
+    </div>
+
+
+  </div>
+  <h5>Code Editor:</h5>
+  <div style="display:flex;align-items: center;justify-content: center;gap:25px;">
+    <button class="suggestb">Auto Suggest</button>
+    <h6 class="suggest">True</h6>
+
+  </div>
+
+
+  <div style="display:flex;align-items: center;justify-content: center;gap:25px;">
+    <button class="feab">Beta Features</button>
+    <h6 class="fea">True</h6>
+
+
+  </div>
+
+
+  <a href="index.html">< Back to editor > </a>
+</div>
+
+<script>
+
+
+  document.body.onpointermove= event=>{
+    const {clientX,clientY}= event
+    document.querySelector('.blur').animate({
+      top:`${clientY}px`,
+      left:`${clientX}px`
+    },{duration:2000,fill:'forwards'})
+
+
+
+  }
+  if (localStorage.getItem('blob')==='true'){
+    document.querySelector('.blur').style.display='block';
+  }
+  else if(localStorage.getItem('blob')==='false'){
+    document.querySelector('.blur').style.display='none';
+  }
+  document.querySelector('.cooldown').value=localStorage.getItem('cooldown')
+
+  function checkforfont(){
+
+    if (localStorage.getItem('font')==1){
+      const allElements = document.querySelectorAll('*');
+
+
+      allElements.forEach(element => {
+        element.style.fontFamily='space mono'
+      });
+
+
+
+    }else if(localStorage.getItem('font')==2){
+      const allElements = document.querySelectorAll('*');
+
+
+      allElements.forEach(element => {
+        element.style.fontFamily='parkinsans'
+      });
+
+    }
+    else if(localStorage.getItem('font')==4){
+      const allElements = document.querySelectorAll('*');
+
+
+      allElements.forEach(element => {
+        element.style.fontFamily='lobster'
+      });
+
+    }
+    else if(localStorage.getItem('font')==5){
+      const allElements = document.querySelectorAll('*');
+
+
+      allElements.forEach(element => {
+        element.style.fontFamily='roboto mono'
+      });
+
+    }
+    else{
+      const allElements = document.querySelectorAll('*');
+
+
+      allElements.forEach(element => {
+        element.style.fontFamily='jetbrains mono'
+      });
+
+    }
+  }
+  checkforfont()
+  let h6 = document.querySelector(".dlete");
+  if (localStorage.getItem('isdbl')==null){
+    isdbl= false
+
+  }else{
+    isdbl= localStorage.getItem('isdbl')==='true';
+    updateH6State()
+  }
+
+  function updateH6State() {
+    if (isdbl) {
+      h6.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+      h6.innerHTML = 'True';
+      h6.style.webkitBackgroundClip = 'text';
+      h6.style.webkitTextFillColor = 'transparent';
+    } else {
+      h6.innerHTML = 'False';
+      h6.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+      h6.style.webkitBackgroundClip = 'text';
+      h6.style.webkitTextFillColor = 'transparent';
+    }
+
+  }
+  updateH6State()
+
+
+  function dblclick(){
+    console.log(isdbl)
+    isdbl=!isdbl;
+    localStorage.setItem('isdbl',isdbl);
+    updateH6State()
+
+  }
+  document.querySelector('.dbl').addEventListener('click',()=>{
+    dblclick()
+
+  })
+  function download(code,file){
+    let a= document.createElement('a');
+    a.setAttribute('href','data:text/plain;charset:utf-8,'+encodeURIComponent(code));
+    a.setAttribute('download',`index.${file}`);
+    a.style.display='none';
+    document.body.append(a);
+    a.click();
+    document.body.removeChild(a);
+
+  }
+
+  document.querySelector('.download_cjs').addEventListener('click',()=>{
+    download(localStorage.getItem('code'),'py')
+  })
+
+
+
+  let aas = document.querySelector(".consb");
+  let isdelete = localStorage.getItem('isdelete') === null ? false : localStorage.getItem('isdelete') === 'true';
+  localStorage.setItem('isdelete', isdelete); // Ensure it's stored
+  updateH6Statea();
+
+  function updateH6Statea() {
+
+    if (isdelete) {
+      aas.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+      aas.innerHTML = 'True';
+      aas.style.webkitBackgroundClip = 'text';
+      aas.style.webkitTextFillColor = 'transparent';
+    } else {
+      aas.innerHTML = 'False';
+      aas.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+      aas.style.webkitBackgroundClip = 'text';
+      aas.style.webkitTextFillColor = 'transparent';
+    }
+
+  }
+  updateH6Statea()
+  updateH6Statea()
+
+
+  function deleteconsole(){
+
+    isdelete=!isdelete;
+    localStorage.setItem('isdelete',isdelete);
+    updateH6Statea()
+
+  }
+  document.querySelector('.cons').addEventListener('click',()=>{
+    deleteconsole()
+
+  })
+
+
+
+
+  if (localStorage.getItem('cooldown')==null){
+    localStorage.setItem('cooldown',2)
+    document.querySelector('.cooldown').value='2'
+
+  }
+
+  let h6as = document.querySelector(".autob");
+  if (localStorage.getItem('isauto')==null){
+    isauto= false
+
+  }else{
+    isauto= localStorage.getItem('isauto')==='true';
+    updateH6Stateqw()
+  }
+
+  function updateH6Stateqw() {
+    if (isauto) {
+      h6as.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+      h6as.innerHTML = 'True';
+      h6as.style.webkitBackgroundClip = 'text';
+      h6as.style.webkitTextFillColor = 'transparent';
+    } else {
+      h6as.innerHTML = 'False';
+      h6as.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+      h6as.style.webkitBackgroundClip = 'text';
+      h6as.style.webkitTextFillColor = 'transparent';
+    }
+
+  }
+  updateH6Stateqw()
+
+
+  function autoclick(){
+    console.log(isauto)
+    isauto=!isauto;
+    localStorage.setItem('isauto',isauto);
+    localStorage.setItem('cool',document.querySelector('.cooldown').value);
+
+    updateH6Stateqw()
+
+  }
+  document.querySelector('.auto').addEventListener('click',()=>{
+    autoclick()
+
+  })
+  document.querySelector('.cooldown').addEventListener('click',()=>{
+    isauto=false
+    localStorage.setItem('isauto',isauto);
+
+    updateH6Stateqw()
+
+  })
+
+
+
+
+
+  //----------------------------
+
+
+
+  let h6su = document.querySelector(".suggest");
+  let issugg = localStorage.getItem('issugg') === null ? true : localStorage.getItem('issugg') === 'true';
+  localStorage.setItem('issugg', issugg);
+
+  if (localStorage.getItem('issugg')==null){
+    issugg= false
+
+  }else{
+    issugg= localStorage.getItem('issugg')==='true';
+    updateH6Statels()
+  }
+
+  function updateH6Statels() {
+    if (issugg) {
+      h6su.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+      h6su.innerHTML = 'True';
+      h6su.style.webkitBackgroundClip = 'text';
+      h6su.style.webkitTextFillColor = 'transparent';
+    } else {
+      h6su.innerHTML = 'False';
+      h6su.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+      h6su.style.webkitBackgroundClip = 'text';
+      h6su.style.webkitTextFillColor = 'transparent';
+    }
+
+  }
+  updateH6Statels()
+
+
+  function suggest(){
+
+    issugg=!issugg;
+    localStorage.setItem('issugg',issugg);
+    updateH6Statels()
+
+  }
+  document.querySelector('.suggestb').addEventListener('click',()=>{
+    suggest()
+
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  let h6f = document.querySelector(".fea");
+  let isfea = localStorage.getItem('isfea') === null ? true : localStorage.getItem('isfea') === 'true';
+  localStorage.setItem('isfea', isfea);
+
+  if (localStorage.getItem('isfea')==null){
+    isfea= true
+
+  }else{
+    isfea= localStorage.getItem('isfea')==='true';
+    updateH6Statef()
+  }
+
+  function updateH6Statef() {
+    if (isfea) {
+      h6f.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+      h6f.innerHTML = 'True';
+      h6f.style.webkitBackgroundClip = 'text';
+      h6f.style.webkitTextFillColor = 'transparent';
+    } else {
+      h6f.innerHTML = 'False';
+      h6f.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+      h6f.style.webkitBackgroundClip = 'text';
+      h6f.style.webkitTextFillColor = 'transparent';
+    }
+
+  }
+  updateH6Statef()
+
+
+  function suggestf(){
+
+    isfea=!isfea;
+    localStorage.setItem('isfea',isfea);
+    updateH6Statef()
+
+  }
+  document.querySelector('.feab').addEventListener('click',()=>{
+    suggestf()
+
+  })
+
+
+</script>
+</body>
+</html>

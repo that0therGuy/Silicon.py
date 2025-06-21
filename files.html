@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img.png" type="image/x-icon">
+    <title>Files</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+
+
+</head>
+<body>
+<div class="blur"></div>
+
+
+<div class="container" style="gap:20px;height:40vh;">
+    <H1><span>📚</span> Files</H1>
+
+
+
+</div>
+<div class="files" style="display:flex;justify-content: center;align-items: center; flex-direction: column">
+
+</div>
+<div style="display: flex;justify-content: center;align-items: center;">
+    <a href="index.html" style="">< Back to editor > </a>
+</div>
+
+
+
+
+
+<script>
+    document.body.onpointermove= event=>{
+        const {clientX,clientY}= event
+        document.querySelector('.blur').animate({
+            top:`${clientY}px`,
+            left:`${clientX}px`
+        },{duration:2000,fill:'forwards'})
+
+
+
+    }
+    if (localStorage.getItem('blob')==='true'){
+        document.querySelector('.blur').style.display='block';
+    }
+    else if(localStorage.getItem('blob')==='false'){
+        document.querySelector('.blur').style.display='none';
+    }
+    function checkforfont(){
+
+        if (localStorage.getItem('font')==1){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='space mono'
+            });
+
+
+
+        }else if(localStorage.getItem('font')==2){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='parkinsans'
+            });
+
+        }
+        else if(localStorage.getItem('font')==4){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='lobster'
+            });
+
+        }
+        else if(localStorage.getItem('font')==5){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='roboto mono'
+            });
+
+        }
+        else{
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='jetbrains mono'
+            });
+
+        }
+    }
+    checkforfont()
+    let div;
+    let file2;
+    if (localStorage.getItem('number')==null){
+        localStorage.setItem('number','1')
+    }
+
+
+
+
+    const storedFiles = JSON.parse(localStorage.getItem('files') || '[]');
+    files = new Map(storedFiles);
+
+    for (let [key, value] of files.entries()) {
+        const div = document.createElement('div');
+        div.style.display='flex'
+        div.style.flexDirection='column'
+
+
+
+
+
+        div.style.marginBottom = '60px';
+        document.querySelector('.files').appendChild(div);
+
+        const fileHeading = document.createElement('h2');
+        fileHeading.innerText = key;
+        fileHeading.style='text-shadow:0 0 35px rgba(182,31,255,.7);'
+
+        const textarea = document.createElement('textarea');
+        textarea.value = value;
+
+        textarea.style.minHeight='150px'
+        textarea.setAttribute('data-key', key);
+        textarea.style.resize = 'both';
+        textarea.addEventListener("input", function () {
+            const fileKey = this.getAttribute('data-key');
+            const updatedContent = this.value;
+
+            let fileData = files.get(fileKey);
+            if (fileData) {
+                files.set(fileKey, [fileData[0], updatedContent]);
+                localStorage.setItem('files', JSON.stringify([...files]));
+            }
+        });
+
+        div.appendChild(fileHeading);
+        div.appendChild(textarea);
+    }
+
+
+</script>
+
+</body>
+</html>

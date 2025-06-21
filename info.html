@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img.png" type="image/x-icon">
+    <title>INFO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <style>
+        .container{
+            height:100%;
+        }
+        html, body {
+            height:140vh !important;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+<div class="blur"></div>
+
+<div class="container" style="gap:20px;">
+    <div>
+        <H1><span>🔍</span> Info</H1>
+
+    </div>
+    <br>
+    <h4 style="text-decoration: underline">General:</h4>
+    <h5>1. Ever felt that online code editors always delay your work by constantly showing <span style="text-decoration: underline;">ads, popups or asking to login or signup</span>.<br> If that is the case, this code editor is for you!</h5>
+
+    <h5>2. <span style="text-decoration: underline;">Run the code</span> by pressing the top heading of the Editor.</h5>
+    <h5>3. Code is saved after it is run.</h5>
+    <br>
+
+    <h4 style="text-decoration: underline">Editor:</h4>
+    <h5>4. Click inside the editor and press F11 to make editor go fullscreen.</h5>
+    <h5>5. <span style="text-decoration: underline;">numpy, scipy, pandas, matplotlib, sympy, scikit-learn, statsmodels, numba, matplotlib, bokeh, seaborn, biopython, rdkit, pyodide-py, lxml, pyyaml, dateutil, pytz, httpx, requests, websockets, scikit-learn, xgboost, micropip, pytest, setuptools and more</span> support available baked right in the editor.</h5>
+    <h5>6. 'Scroll to' asks for a numerical input for scrolling to a specific line. If the operation is successful, it will blink green otherwise it will remain the same.<br> It executes automatically.</h5>
+
+    <br>
+
+
+
+    <h5><span style="text-decoration: underline;">5. Beta Features (if enabled):</span><br><br>1. Toggling false or true by clicking them in the editor <br> 2. Swiping on number values to change them based on the swipe direction.</h5>
+
+
+    <a href="index.html">< Back to editor > </a>
+</div>
+<style>
+
+
+</style>
+<script>
+    document.body.onpointermove= event=>{
+        const {clientX,clientY}= event
+        document.querySelector('.blur').animate({
+            top:`${clientY}px`,
+            left:`${clientX}px`
+        },{duration:2000,fill:'forwards'})
+
+
+
+    }
+    if (localStorage.getItem('blob')==='true'){
+        document.querySelector('.blur').style.display='block';
+    }
+    else if(localStorage.getItem('blob')==='false'){
+        document.querySelector('.blur').style.display='none';
+    }
+    function checkforfont(){
+
+        if (localStorage.getItem('font')==1){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='space mono'
+            });
+
+
+
+        }else if(localStorage.getItem('font')==2){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='parkinsans'
+            });
+
+        }
+        else if(localStorage.getItem('font')==4){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='lobster'
+            });
+
+        }
+        else if(localStorage.getItem('font')==5){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='roboto mono'
+            });
+
+        }
+        else{
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='jetbrains mono'
+            });
+
+        }
+    }
+    checkforfont()
+</script>
+</body>
+</html>

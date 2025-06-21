@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Styles</title>
+    <link rel="icon" href="img.png" type="image/x-icon">
+    <link rel="stylesheet" href="css.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="blur"></div>
+
+<div class="container" style="gap:20px;">
+    <H1 style="margin:25px;"><span>🔮</span> Styles</H1>
+    <div class="fg" >
+        <button class="bloom">Extra bloom</button><h6 class="bloomc">False</h6>
+
+    </div>
+    <div class="plain">
+        <button class="plainb">Plain coloured Text Editor</button> <h6 class="plainc">False</h6>
+    </div>
+    <div class="console">
+        <button class="consoleb">Console output position</button> <h5 class="consolec">Center</h5>
+    </div>
+    <div class="font">
+        <button class="fontb">Change Font</button><h5 class="fontc">Jetbrains Mono</h5>
+    </div>
+    <div class="cursor">
+        <button class="cursorb">Custom Cursor</button><h5 class="cursorc">Jetbrains Mono</h5>
+    </div>
+    <div class="blobd">
+        <button class="blobb">The Blob</button> <h5 class="blobc">True</h5>
+    </div>
+    <h5>You can style it further using Javascript!</h5>
+
+    <a href="index.html">< Back to editor > </a>
+</div>
+<style>
+    .container{
+        height:100svh;
+    }
+    .fg,.plain,.font,.console,.blobd{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap:40px;
+    }
+    @media only screen and (max-width: 600px) {
+        .fg,.plain {
+            flex-direction: column;
+            gap:15px;
+        }
+    }
+    .cursor{
+        display: none;
+    }
+</style>
+<script src='index.js'></script>
+<script>
+    document.body.onpointermove= event=>{
+        const {clientX,clientY}= event
+        document.querySelector('.blur').animate({
+            top:`${clientY}px`,
+            left:`${clientX}px`
+        },{duration:2000,fill:'forwards'})
+
+
+
+    }
+
+
+    let isplain = localStorage.getItem('isplain') === "true" ;
+
+    let h63 = document.querySelector(".plainc");
+    function updateH6State1() {
+        if (isplain) {
+            h63.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+            h63.innerHTML = 'True';
+            h63.style.webkitBackgroundClip = 'text';
+            h63.style.webkitTextFillColor = 'transparent';
+        } else {
+            h63.innerHTML = 'False';
+            h63.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+            h63.style.webkitBackgroundClip = 'text';
+            h63.style.webkitTextFillColor = 'transparent';
+        }
+
+    }
+
+
+    document.querySelector('.plainb').addEventListener('click', () => {
+        isplain = !isplain;
+        localStorage.setItem('isplain', isplain);
+
+
+        updateH6State1();
+    });
+
+
+    updateH6State1();
+
+
+    let isbloom = localStorage.getItem('bloom') === "true" ;
+
+    let h6 = document.querySelector(".bloomc");
+    function updateH6State() {
+        if (isbloom) {
+            h6.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+            h6.innerHTML = 'True';
+            h6.style.webkitBackgroundClip = 'text';
+            h6.style.webkitTextFillColor = 'transparent';
+        } else {
+            h6.innerHTML = 'False';
+            h6.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+            h6.style.webkitBackgroundClip = 'text';
+            h6.style.webkitTextFillColor = 'transparent';
+        }
+
+    }
+
+
+
+    document.querySelector('.bloom').addEventListener('click', () => {
+        isbloom = !isbloom;
+        localStorage.setItem('bloom', isbloom);
+
+
+        updateH6State();
+    });
+
+
+    updateH6State();
+
+    let font=''
+    if (localStorage.getItem('font')!=null) {
+        font = localStorage.getItem('font');
+    }else{
+        font=3
+    }
+
+
+    let h6111 = document.querySelector(".fontc");
+    function updateH6State4() {
+        if (font==1) {
+            h6111.innerHTML = 'Space Mono';
+        }
+        else if(font==2){
+            h6111.innerHTML = 'Parkinsans';
+
+        }
+        else if(font==4){
+            h6111.innerHTML = 'Lobster';
+
+        }
+        else if(font==5){
+            h6111.innerHTML = 'Roboto Mono';
+
+        }
+        else {
+
+            h6111.innerHTML = 'Jetbrains';
+        }
+
+    }
+
+
+    document.querySelector('.fontb').addEventListener('click', () => {
+        if(font==5){
+            font=1
+        }else{
+            font++
+        }
+        localStorage.setItem('font', font);
+        checkforfont()
+
+
+        updateH6State4();
+    });
+
+
+    updateH6State4();
+    function checkforfont(){
+
+        if (localStorage.getItem('font')==1){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='space mono'
+            });
+
+
+
+        }else if(localStorage.getItem('font')==2){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='parkinsans'
+            });
+
+        }
+        else if(localStorage.getItem('font')==4){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='lobster'
+            });
+
+        }
+        else if(localStorage.getItem('font')==5){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='roboto mono'
+            });
+
+        }
+        else{
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='jetbrains mono'
+            });
+
+        }
+    }
+    checkforfont()
+
+
+    //-------------------------------------------------------------------
+    let con=''
+    if (localStorage.getItem('consolep')!=null) {
+        con = localStorage.getItem('consolep');
+    }else{
+        con=0
+    }
+
+
+    let h611111 = document.querySelector(".consolec");
+    function updateH6State11() {
+        if (con==0) {
+            h611111.innerHTML = 'Center';
+        }
+        else if(con==1){
+            h611111.innerHTML = 'Left';
+
+        }
+        else{
+            h611111.innerHTML = 'Right';
+
+        }
+
+
+    }
+    document.querySelector('.consoleb').addEventListener('click', () => {
+        if(con==2){
+            con=0
+        }else{
+            con++
+        }
+        localStorage.setItem('consolep', con);
+        updateH6State11()
+
+
+        updateH6State11();
+    });
+
+
+    updateH6State11();
+
+
+
+
+
+    if (localStorage.getItem('iscustom')==null){
+
+        localStorage.setItem('iscustom',false)
+    }
+    let iscustom = localStorage.getItem('iscustom') === "true" ;
+
+    let h63c = document.querySelector(".cursorc");
+    function updateH6State1c() {
+        if (iscustom) {
+            h63c.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+            h63c.innerHTML = 'True';
+            h63c.style.webkitBackgroundClip = 'text';
+            h63c.style.webkitTextFillColor = 'transparent';
+        } else {
+            h63c.innerHTML = 'False';
+            h63c.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+            h63c.style.webkitBackgroundClip = 'text';
+            h63c.style.webkitTextFillColor = 'transparent';
+        }
+
+    }
+
+
+    document.querySelector('.cursorb').addEventListener('click', () => {
+        iscustom = !iscustom;
+        localStorage.setItem('iscustom',iscustom);
+
+
+        updateH6State1c();
+    });
+
+
+    updateH6State1c();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if(localStorage.getItem('blob')==null){
+        localStorage.setItem('blob','true')
+    }
+
+    let isblob = localStorage.getItem('blob') === "true" ;
+
+    let h6z = document.querySelector(".blobc");
+    function updateH6Statehjj() {
+        if (isblob) {
+            h6z.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+            h6z.innerHTML = 'True';
+            h6z.style.webkitBackgroundClip = 'text';
+            h6z.style.webkitTextFillColor = 'transparent';
+        } else {
+            h6z.innerHTML = 'False';
+            h6z.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+            h6z.style.webkitBackgroundClip = 'text';
+            h6z.style.webkitTextFillColor = 'transparent';
+        }
+        if (localStorage.getItem('blob')==='true'){
+            document.querySelector('.blur').style.display='block';
+        }
+        else if(localStorage.getItem('blob')==='false'){
+            document.querySelector('.blur').style.display='none';
+        }
+
+    }
+    updateH6Statehjj();
+
+
+
+    document.querySelector('.blobb').addEventListener('click', () => {
+        isblob = !isblob;
+        localStorage.setItem('blob', isblob);
+
+
+
+        updateH6Statehjj();
+    });
+
+
+
+
+    if (localStorage.getItem('blob')==='true'){
+        document.querySelector('.blur').style.display='block';
+    }
+    else if(localStorage.getItem('blob')==='false'){
+        document.querySelector('.blur').style.display='none';
+    }
+
+
+
+</script>
+</body>
+</html>

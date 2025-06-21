@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="img.png" type="image/x-icon">
+  <title>Challenges</title>
+  <link rel="stylesheet" href="css.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+<div class="container" style="gap:20px;">
+  <H1>Challenge:</H1>
+
+  <button>Challenge Me</button><h5></h5>
+
+
+
+  <a href="index.html">< Back to editor > </a>
+  <script>
+    if (localStorage.getItem('challenge')!=null){
+      document.querySelector('h5').innerHTML=localStorage.getItem('challenge');
+    }
+
+    let list = [
+            'Make a function that returns an array of two numbers that add to specific number passed.',
+            'Make a function that logs a right-angled triangle in the console.',
+            'Make a function that returns if the number is prime number or not.',
+            'Make a roulette game with money mechanics.',
+            'Make a function that logs an equilateral triangle in the console.',
+            'Make a function that prints all numbers from 1 to 100, but replace multiples of 3 with "Fizz" and multiples of 5 with "Buzz.',
+            'Make a function that returns 100 fibonacci sequence numbers and divides them by PI.',
+            'Make a function that returns a random number between 191 and 291']
+    document.querySelector('button').addEventListener('click',()=>{
+      let challenge=list[Math.floor(Math.random()*list.length)]
+      document.querySelector('h5').innerHTML=challenge;
+      localStorage.setItem('challenge',challenge)
+    })
+    function checkforfont(){
+
+      if (localStorage.getItem('font')==1){
+        const allElements = document.querySelectorAll('*');
+
+
+        allElements.forEach(element => {
+          element.style.fontFamily='space mono'
+        });
+
+
+
+      }else if(localStorage.getItem('font')==2){
+        const allElements = document.querySelectorAll('*');
+
+
+        allElements.forEach(element => {
+          element.style.fontFamily='parkinsans'
+        });
+
+      }
+      else if(localStorage.getItem('font')==4){
+        const allElements = document.querySelectorAll('*');
+
+
+        allElements.forEach(element => {
+          element.style.fontFamily='lobster'
+        });
+
+      }
+      else if(localStorage.getItem('font')==5){
+        const allElements = document.querySelectorAll('*');
+
+
+        allElements.forEach(element => {
+          element.style.fontFamily='roboto mono'
+        });
+
+      }
+      else{
+        const allElements = document.querySelectorAll('*');
+
+
+        allElements.forEach(element => {
+          element.style.fontFamily='jetbrains mono'
+        });
+
+      }
+    }
+    checkforfont()
+  </script>
+  <style>
+    h5{
+      background: linear-gradient(90deg, rgb(142, 52, 252) 0%, rgba(255, 68, 98, 0.8) 100%);
+
+      color:transparent;
+      background-clip: text;
+      text-shadow:0 0 35px rgba(255, 0, 174, 0.5);
+      text-align: center;
+    }
+  </style>
+</div>
+</body>
+</html>
