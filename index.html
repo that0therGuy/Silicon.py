@@ -71,6 +71,8 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
             <div class="btnh">
 
                 <div style="display: inline-block">
+                    <div class="gemini" style="display:inline-block;"><img height="16" width="48" src="gemini.svg" alt="gemini"></div>
+
                     <div class='cpos'style="display:inline-block;"><p class='pos' style="display:inline-block;"></p></div>
 
                     <div class='linesc'style="display:inline-block;"><p style="display:inline-block;">Lines: </p><p class='lines'style="display:inline-block;"></p></div>
@@ -81,10 +83,12 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
                         <label class="file-label" for="fileInput">📥 Load...</label>
                         <input class="inputfile"  id="fileInput" type="file" style="display: none;">
                     </div>
+
                 </div>
                 <div class='scrolltod'style="display:inline-block;"><p style="display:inline-block;">📌 Scroll to&nbsp;</p><input  type="text" class="scrollto"></div>
 
                 <button style='padding:8px;' class="full"><img src="full.svg" height="16" width="15" style="margin:0;"></button>
+
             </div>
 
         </div>
@@ -209,6 +213,10 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
 
         localStorage.setItem('islint','true')
     }
+    if (localStorage.getItem('isgem')==null){
+
+        localStorage.setItem('isgem','false')
+    }
     if (localStorage.getItem('bloom')==null){
 
         localStorage.setItem('bloom','false')
@@ -235,7 +243,12 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
     }
     let autocompleteEnabled = localStorage.getItem('issugg') === 'true';
 
+    if (localStorage.getItem('isgem')=='false'){
+        document.querySelector('.gemini').style.display='none';
+    }else{
+        document.querySelector('.gemini').style.display='inline-block';
 
+    }
     let editor = CodeMirror(document.getElementById('editor'), {
         mode: "python",
         theme: "default",
@@ -869,6 +882,59 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
     else if(localStorage.getItem('blob')==='false'){
         document.querySelector('.blur').style.display='none';
     }
+    document.querySelector('.gemini').addEventListener('click',()=>{
+
+        let prom= prompt('prompt: ')
+        let output=''
+        askGeminiWithUserKey(
+            `following prompt must only be answered formally, if you are writing code ,DO NOT ATTEMPT TO FORMAT CODE JUST SEND AS PLAIN TEXT. If asked for code, only give code, nothing else. If asked to change or modify the code given, end the response with 'oo23349-0bvbvvdichloride',IF THE USER ASKS FOR IMPOSSIBLE CODE OR YOU MUST TYPE SOMETHING OTHER THAN CODE (TOO IMPORTANT TO NOT WRITE) DO NOT END THE RESPONSE WITH THE CODE.. act  without mentioning any command before:\n code (code is always python, please dont use formatting techniques like '\`\`\` python '): ${editor.getValue()} \n` + prom
+        ).then(value => {
+            let output = value;
+
+            if (output.includes('oo23349-0bvbvvdichloride')) {
+                // Remove the special marker
+                output = output.replace('oo23349-0bvbvvdichloride', "");
+
+                // Split into lines
+                const lines = output.split('\n');
+
+                // Remove first and last line if more than 2 lines
+                if (lines.length > 2) {
+                    output = lines.slice(1, -1).join('\n');
+                }
+
+                // Set cleaned output back into editor
+                editor.setValue(output);
+
+            } else {
+                document.querySelector('.consoleOutput').innerText='';
+                console.log("𝔾𝕖𝕞𝕚𝕟𝕚'𝕤 ℝ𝕖𝕤𝕡𝕠𝕟𝕤𝕖: \n" + value);
+            }
+        });
+
+    })
+
+    async function askGeminiWithUserKey(promptText) {
+        const key = localStorage.getItem("key");
+        if (!key) return "No key provided.";
+
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: promptText }] }]
+            })
+        });
+
+        const result = await res.json();
+        if (result.error) {
+            return `Error: ${result.error.message}`;
+        }
+
+        return result.candidates?.[0]?.content?.parts?.[0]?.text ?? "No response.";
+    }
+
+
 
 
 
