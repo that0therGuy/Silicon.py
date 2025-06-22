@@ -4,11 +4,11 @@
 
     margin:0;
     padding:0;
-    color: rgb(251, 163, 189);
+    color: rgb(163, 238, 251);
     caret-color: white;
 }
 ::-webkit-scrollbar{
-    background-color: #380a32;
+    background-color: #0a3138;
 
     visibility: hidden !important;
     width:0;
@@ -50,11 +50,12 @@
     animation:backg .7s ease;
 }
 html{
-    background-color: rgb(70, 0, 46);
+    background-color: rgb(0, 41, 70);
 }
 body{
     height:max-content;
-    background: linear-gradient(to top left, rgba(0,0,0,1) 0%, rgb(69, 22, 50) 100%);
+    background: linear-gradient(to top left, rgba(0,0,0,1) 0%, rgb(0, 24, 41) 100%);
+
     padding-top:5px;
 
 
@@ -72,17 +73,17 @@ h1,h5{
     user-select: none;
 }
 h1,h5,a{
-    background: linear-gradient(90deg, rgba(219,219,219,1) 0%, rgba(255, 31, 150, 0.8) 100%);
+    background: linear-gradient(90deg, rgba(219,219,219,1) 0%, rgba(31, 154, 255, 0.8) 100%);
     color:transparent;
     background-clip: text;
-    text-shadow:0 0 35px rgba(255, 31, 158, 0.7);
+    text-shadow:0 0 35px rgba(31, 177, 255, 0.7);
     text-align: center;
 }
 .mainn{
-    background: linear-gradient(90deg, rgb(255, 180, 243) 0%, rgba(234, 25, 161, 0.8) 100%);
+    background: linear-gradient(90deg, rgb(180, 232, 255) 0%, rgba(25, 140, 234, 0.8) 100%);
     color:transparent;
     background-clip: text;
-    text-shadow:0 0 35px rgba(255, 31, 165, 0.7);
+    text-shadow:0 0 35px rgba(31, 188, 255, 0.7);
     text-align: center;
 }
 
@@ -90,7 +91,7 @@ h6{
     background: linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%);
     color:transparent;
     background-clip: text;
-    text-shadow:0 0 35px rgba(255, 31, 177, 0.7);
+    text-shadow:0 0 35px rgba(31, 214, 255, 0.7);
     text-align: center;
     font-size:15px;
 }
@@ -118,7 +119,7 @@ h1:hover{
     transform:translateY(-3px);
 }
 .time{
-    background: linear-gradient(90deg, rgb(229, 74, 208) 0%, rgba(234, 65, 110, 0.8) 100%);
+    background: linear-gradient(90deg, rgb(118, 119, 204) 0%, rgba(104, 140, 216, 0.8) 100%);
     color:transparent;
     background-clip: text;
 }
@@ -132,15 +133,18 @@ a:hover{
 
 }
 .a4:hover,.time:hover{
-    text-shadow: 0 0 15px rgba(234, 65, 110, 1);
+    text-shadow: 0 0 15px rgb(35, 99, 133);
 }
 .a0:hover,.a1:hover,.a2:hover,.a3:hover{
-    text-shadow: 0 0 15px rgb(234, 98, 171);
+    text-shadow: 0 0 15px rgb(66, 113, 159);
 
+}
+.cm-string{
+    color: #6565af !important;
 }
 
 .CodeMirror{
-    box-shadow:0 0 25px rgba(54, 0, 24, 0.3);
+    box-shadow:0 0 25px rgba(0, 38, 54, 0.3);
     width: auto;
 
 }
@@ -148,7 +152,7 @@ a:hover{
 .CodeMirror,textarea{
     border-radius:10px;
     border:none;
-    background: linear-gradient(to top left, rgba(52, 0, 40, 0.2) 0%, rgb(67, 24, 64) 100%) !important; ;
+    background: linear-gradient(to top left, rgba(0, 32, 52, 0.2) 0%, rgb(10, 25, 43) 100%) !important; ;
     caret-color:white;
 
     padding:15px;
@@ -157,7 +161,7 @@ a:hover{
 }
 textarea{
 
-    box-shadow:0 0 25px rgba(54, 0, 35, 0.3);
+    box-shadow:0 0 25px rgba(0, 33, 54, 0.3);
     width:30vw;
     height:300px;
     resize:horizontal;
@@ -172,9 +176,9 @@ button{
     border-radius: 5px;
     border:none;
     padding:10px;
-    box-shadow:0 0 25px rgba(54, 0, 39, 0.3);
-    color: rgb(255, 86, 216);
-    background: linear-gradient(to top left, rgba(52, 0, 40, 0.2) 0%, rgb(70, 0, 46) 100%) !important;
+    box-shadow:0 0 25px rgba(0, 27, 54, 0.3);
+    color: rgb(86, 171, 255);
+    background: linear-gradient(to top left, rgba(0, 30, 52, 0.2) 0%, rgb(0, 49, 70) 100%) !important;
     transition:all .5s;
 }
 button:hover{
@@ -205,8 +209,8 @@ button:hover{
 }
 
 .CodeMirror-cursor {
-    border-left: 6px solid rgba(145, 74, 120, 0.5) !important;
-    box-shadow:0 0 30px #fc34c3;
+    border-left: 6px solid rgba(74, 115, 145, 0.5) !important;
+    box-shadow:0 0 30px #3498fc;
 
 
 
@@ -265,35 +269,35 @@ button:hover{
 /*zsscS*/
 
 .CodeMirror-selected{
-    background-color: #88066e !important;
+    background-color: #065288 !important;
 }
 .CodeMirror-s-material .CodeMirror-variable,.CodeMirror-variable-2,.CodeMirror-variable-3{
     color:white !important;
 }
 .CodeMirror-linenumbers{
-    box-shadow: 0 0 7px #641159;
+    box-shadow: 0 0 7px #112964;
     padding-right:2px;
     z-index:9999999998;
     border-right:none !important;
     outline:none;
-    background: linear-gradient(to top left, rgb(47, 23, 39) 0%, rgb(70, 0, 46) 100%) !important;
+    background: linear-gradient(to top left, rgb(23, 40, 47) 0%, rgb(0, 54, 70) 100%) !important;
 
 }
 .CodeMirror-linenumber{
-    color: #ff45a8 !important;
+    color: #45e9ff !important;
 
 }
 ::selection{
-    background-color: purple;
+    background-color: #003c80;
 }
 .sp_link{
-    background: linear-gradient(90deg, rgb(229, 74, 208) 0%, rgba(234, 65, 110, 0.8) 100%);
+    background: linear-gradient(90deg, rgb(74, 182, 229) 0%, rgba(65, 124, 234, 0.8) 100%);
     color:transparent;
     background-clip: text;
 
 }
 .cooldown{
-    background: linear-gradient(to top left, rgb(33, 0, 19) 0%, rgb(70, 0, 46) 100%);
+    background: linear-gradient(to top left, rgb(0, 20, 33) 0%, rgb(0, 54, 70) 100%);
     border:none;
     outline:none;
     padding:7px;
@@ -317,10 +321,10 @@ input[type=number] {
 }
 
 .CodeMirror-hints {
-    background: #ff7cd1 !important;
+    background: #7cebff !important;
     color: #ffffff !important;
     font-size: 14px !important;
-    border: 2px solid #794865 !important;
+    border: 2px solid #486a79 !important;
 }
 
 .glow{
@@ -328,20 +332,20 @@ input[type=number] {
 
 }
 .CodeMirror-hint-active {
-    background: #911e82 !important;
+    background: #1e7291 !important;
     color: #edd8ff !important;
     padding:3px !important;
     text-decoration: underline !important;
-    text-decoration-color: #fd6ad3 !important;
+    text-decoration-color: #6a9dfd !important;
 
 }
 
 .cm-def , .cm-builtin{
-    color: #fb319d !important;
+    color: #3182fb !important;
 
 }
 .cm-keyword{
-    color: #ff579a !important;
+    color: #2cb5a3 !important;
 }
 .cm-number,.number-span{
     color: #128c00 !important;
@@ -379,14 +383,14 @@ input[type=number] {
 }
 
 .CodeMirror-lint-tooltip {
-    background: #2b132d !important;
+    background: #13202d !important;
     color: white !important;
-    border: 1px solid #aa0055 !important;
+    border: 1px solid #0055aa !important;
     border-radius: 5px;
     padding: 5px;
 }
 .CodeMirror-fullscreen {
-    background: linear-gradient(to top left, rgb(52, 0, 37), rgb(70, 0, 31)) ;
+    background: linear-gradient(to top left, rgb(0, 38, 52), rgb(0, 16, 70)) ;
     font-size:20px !important;
 
 }
@@ -403,13 +407,13 @@ input[type=number] {
 .z{
     padding-right:20px;
     padding-left:20px;
-    background: linear-gradient(to top left, rgba(94, 30, 85, 0.2) 0%, rgb(70, 0, 48) 100%) !important;
+    background: linear-gradient(to top left, rgba(30, 50, 94, 0.2) 0%, rgb(0, 33, 70) 100%) !important;
 
 }
 .z:hover{
     margin-right:5px;
     margin-left: 5px;
-    box-shadow: 0 0 60px rgba(231, 94, 172, 0.2);
+    box-shadow: 0 0 60px rgba(94, 163, 231, 0.2);
 }
 
 .btnh{
@@ -421,24 +425,24 @@ p{
     margin-right:5px;
 }
 .linesc,.cpos,.scrolltod,.gemini{
-    border:2px solid rgb(93, 0, 100);
+    border:2px solid rgb(0, 58, 100);
     padding:4px;
     border-radius:4px;
-    background: linear-gradient(to top left, rgb(68, 6, 50), rgb(75, 4, 75)) ;
+    background: linear-gradient(to top left, rgb(6, 49, 68), rgb(0, 31, 89)) ;
     box-shadow: 6px 6px 25px rgba(170, 0, 85, 0.2);
 
 
 }
 .gemini{
-    background: linear-gradient(to top left, rgb(0, 45, 128), rgb(94, 0, 181)) ;
-    border:2px solid rgb(81, 130, 221);
+    background: linear-gradient(to top left, rgb(0, 33, 97), rgb(0, 92, 110)) ;
+    border:2px solid rgb(71, 111, 188);
     width:fit-content;
 
 
 
 }
 .gemkey{
-    background: linear-gradient(to top left, rgb(51, 16, 43) 0%, rgb(74, 24, 44) 100%);
+    background: linear-gradient(to top left, rgb(16, 38, 51) 0%, rgb(24, 26, 74) 100%);
     border: none;
     outline: none;
     padding: 7px;
@@ -473,11 +477,11 @@ p{
 
 }
 .scrollto{
-    border:1px solid rgb(125, 30, 133);
+    border:1px solid rgb(30, 82, 133);
     padding:4px;
     border-radius:4px;
-    background: linear-gradient(to top left, rgb(56, 6, 68), rgb(75, 4, 75)) ;
-    box-shadow: 6px 6px 25px rgba(170, 0, 85, 0.2);
+    background: linear-gradient(to top left, rgb(6, 51, 68), rgb(4, 26, 75)) ;
+    box-shadow: 6px 6px 25px rgba(0, 94, 170, 0.2);
     width:2rem;
     text-align: center;
     height:9px;
@@ -494,7 +498,7 @@ p{
     right:50%;
     translate:-50% -50%;
     border-radius:50%;
-    background: linear-gradient(90deg, rgba(125, 33, 223, 0.5) 0%, rgba(251, 32, 127, 0.78) 100%);
+    background: linear-gradient(90deg, rgba(18, 76, 124, 0.5) 0%, rgba(14, 45, 112, 0.78) 100%);
     animation:change 10s infinite linear;
     opacity: .3;
     filter:blur(900px);
