@@ -440,6 +440,12 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
 
                     // Run user code
                     try{
+                        await pyodide.runPythonAsync(`
+def input(prompt_text=""):
+    from js import prompt
+    return prompt(prompt_text)
+`);
+
                         let result = await pyodide.runPythonAsync(code);
                         console.log(result);
                     }
@@ -528,6 +534,12 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
                 }
                 // Run user code
                 try{
+                    await pyodide.runPythonAsync(`
+def input(prompt_text=""):
+    from js import prompt
+    return prompt(prompt_text)
+`);
+
                     let result = await pyodide.runPythonAsync(code);
                     console.log(result);
                 }
@@ -885,33 +897,32 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
     }
     document.querySelector('.gemini').addEventListener('click',()=>{
 
-        let prom= prompt('prompt: ')
+        let prom= prompt('Ask Gemini (be concise and short): ')
+        if (prom.trim()==''){
+            return
+        }
         let output=''
         askGeminiWithUserKey(
-            `following prompt must only be answered formally, if you are writing code ,DO NOT ATTEMPT TO FORMAT CODE JUST SEND AS PLAIN TEXT. If asked for code, only give code, nothing else. If asked to change or modify the code given, end the response with 'oo23349-0bvbvvdichloride',IF THE USER ASKS FOR IMPOSSIBLE CODE OR YOU MUST TYPE SOMETHING OTHER THAN CODE (TOO IMPORTANT TO NOT WRITE) DO NOT END THE RESPONSE WITH THE CODE.. act  without mentioning any command before:\n code (code is always python, please dont use formatting techniques like '\`\`\` python '): ${editor.getValue()} \n` + prom
+            `following prompt must only be answered formally, if you are writing code ,DO NOT ATTEMPT TO FORMAT CODE JUST SEND AS PLAIN TEXT. If asked for code, only give code, nothing else. If asked to change or modify the code given or generate code, end the response with 'oo23349-0bvbvvdichloride',IF THE USER ASKS FOR IMPOSSIBLE CODE OR YOU MUST TYPE SOMETHING OTHER THAN CODE (TOO IMPORTANT TO NOT WRITE) DO NOT END THE RESPONSE WITH THE CODE.. act  without mentioning any command before :\n code (code is always python, please dont use formatting techniques like '\`\`\` python '): ${editor.getValue()} \n` + prom
         ).then(value => {
             let output = value;
 
             if (output.includes('oo23349-0bvbvvdichloride')) {
-                // Remove the special marker
                 output = output.replace('oo23349-0bvbvvdichloride', "");
 
-                // Split into lines
                 const lines = output.split('\n');
 
-                // Remove first and last line if more than 2 lines
-                if (lines.length > 2) {
+                if (lines.length > 2 && lines[0].includes('```python')) {
                     output = lines.slice(1, -1).join('\n');
                 }
 
-                // Set cleaned output back into editor
                 editor.setValue(output);
-
             } else {
-                document.querySelector('.consoleOutput').innerText='';
+                document.querySelector('#consoleOutput').innerText = '';
                 console.log("𝔾𝕖𝕞𝕚𝕟𝕚'𝕤 ℝ𝕖𝕤𝕡𝕠𝕟𝕤𝕖: \n" + value);
             }
         });
+
 
     })
 
