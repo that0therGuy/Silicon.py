@@ -363,6 +363,11 @@ input[type=number] {
     text-shadow: 0 0 20px rgb(235, 19, 255,.5);
 
 }
+.cm-meta{
+    color: #dbfd61 !important;
+    text-shadow: 0 0 20px rgba(255, 222, 75, 0.5);
+
+}
 .cm-property{
     color: #f4ab8a !important;
     text-shadow: 0 0 20px rgba(181, 127, 84, 0.5);
