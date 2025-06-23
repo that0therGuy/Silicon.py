@@ -459,6 +459,7 @@ input[type=number] {
 
 }
 .z{
+    transition: all .5s;
     padding-right:20px;
     padding-left:20px;
     background: linear-gradient(to top left, rgba(30, 50, 94, 0.2) 0%, rgb(0, 33, 70) 100%) !important;
