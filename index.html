@@ -413,24 +413,36 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
                     // Extract top-level imports from code (simple regex)
                     function extractImports(code) {
                         const imports = new Set();
-                        // Match 'import x, y, z' or 'from x import y'
-                        const importRegex = /^\s*(import|from)\s+([a-zA-Z0-9_,\s]+)/gm;
-                        let match;
-                        while ((match = importRegex.exec(code)) !== null) {
-                            let imported = match[2];
-                            // Split by comma and clean spaces
-                            imported.split(",").forEach(pkg => {
-                                pkg = pkg.trim().split('.')[0]; // get base package (e.g. 'matplotlib' from 'matplotlib.pyplot')
-                                if (pkg) imports.add(pkg);
-                            });
+                        const lines = code.split('\n');
+
+                        for (const line of lines) {
+                            const trimmed = line.trim();
+                            if (trimmed.startsWith("import ")) {
+                                // e.g. "import pandas, numpy as np"
+                                trimmed.slice(7).split(",").forEach(part => {
+                                    const base = part.trim().split(" ")[0].split('.')[0];
+                                    if (base) imports.add(base);
+                                });
+                            } else if (trimmed.startsWith("from ")) {
+                                // e.g. "from pandas.core.frame import DataFrame"
+                                const parts = trimmed.split(" ");
+                                if (parts.length >= 2) {
+                                    const base = parts[1].split('.')[0];
+                                    if (base) imports.add(base);
+                                }
+                            }
                         }
+
                         return Array.from(imports);
                     }
+
+
 
 
                     // Find which packages to load
                     const userImports = extractImports(code);
                     const packagesToLoad = userImports.filter(pkg => availablePackages.includes(pkg));
+                    console.log(packagesToLoad)
 
                     // Load packages sequentially (can be optimized with Promise.all)
                     for (const pkg of packagesToLoad) {
@@ -501,32 +513,42 @@ def input(prompt_text=""):
                     "numpy", "scipy", "pandas", "matplotlib", "sympy",
                     "scikit-learn", "statsmodels", "numba", "bokeh", "seaborn",
                     "biopython", "rdkit", "pyodide-py", "lxml", "pyyaml",
-                    "python-dateutil", "pytz", "httpx", "requests", "websockets",
+                    "python-dateutil", "pytz",
                     "xgboost", "micropip", "pytest", "setuptools"
                 ];
 
-                // Extract top-level imports from code (simple regex)
                 function extractImports(code) {
                     const imports = new Set();
-                    // Match 'import x, y, z' or 'from x import y'
-                    const importRegex = /^\s*(import|from)\s+([a-zA-Z0-9_,\s]+)/gm;
-                    let match;
-                    while ((match = importRegex.exec(code)) !== null) {
-                        let imported = match[2];
-                        // Split by comma and clean spaces
-                        imported.split(",").forEach(pkg => {
-                            pkg = pkg.trim().split('.')[0]; // get base package (e.g. 'matplotlib' from 'matplotlib.pyplot')
-                            if (pkg) imports.add(pkg);
-                        });
+                    const lines = code.split('\n');
+
+                    for (const line of lines) {
+                        const trimmed = line.trim();
+                        if (trimmed.startsWith("import ")) {
+                            // e.g. "import pandas, numpy as np"
+                            trimmed.slice(7).split(",").forEach(part => {
+                                const base = part.trim().split(" ")[0].split('.')[0];
+                                if (base) imports.add(base);
+                            });
+                        } else if (trimmed.startsWith("from ")) {
+                            // e.g. "from pandas.core.frame import DataFrame"
+                            const parts = trimmed.split(" ");
+                            if (parts.length >= 2) {
+                                const base = parts[1].split('.')[0];
+                                if (base) imports.add(base);
+                            }
+                        }
                     }
+
                     return Array.from(imports);
                 }
+
+
 
 
                 // Find which packages to load
                 const userImports = extractImports(code);
                 const packagesToLoad = userImports.filter(pkg => availablePackages.includes(pkg));
-
+                console.log(packagesToLoad)
                 // Load packages sequentially (can be optimized with Promise.all)
                 for (const pkg of packagesToLoad) {
                     console.log(`Loading package: ${pkg}`);
