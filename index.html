@@ -272,11 +272,20 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
 
 
 
-    editor.on("inputRead", function (editor, event) {
-        if (autocompleteEnabled && !editor.state.completionActive) {  // Prevent multiple autocompletes
-            CodeMirror.commands.autocomplete(editor, null, { completeSingle: false });
+    editor.on("inputRead", function (cm, change) {
+        if (!autocompleteEnabled || cm.state.completionActive) return;
+
+        let cur = cm.getCursor();
+        let prevChar = cm.getRange({line: cur.line, ch: cur.ch - 1}, cur);
+
+        if (prevChar === ":") {
+
+            return;
         }
+
+        CodeMirror.commands.autocomplete(cm, null, { completeSingle: false });
     });
+
     editor.on("change", savekey);
     let on= 'b1';
 
