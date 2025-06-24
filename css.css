@@ -443,7 +443,6 @@ input[type=number] {
     padding: 5px;
 }
 .CodeMirror-fullscreen {
-    background: linear-gradient(to top left, rgb(0, 19, 30) 0%, rgb(5, 13, 25) 100%) !important; ;
 
     font-size:20px !important;
 
