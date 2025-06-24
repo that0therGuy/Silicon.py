@@ -31,6 +31,9 @@
     <div class="blobd">
         <button class="blobb">The Blob</button> <h5 class="blobc">True</h5>
     </div>
+    <div class="borderd">
+        <button class="borderb">Borders</button> <h5 class="borderc">False</h5>
+    </div>
     <h5>You can style it further using Javascript!</h5>
 
     <a href="index.html">< Back to editor > </a>
@@ -39,7 +42,7 @@
     .container{
         height:100svh;
     }
-    .fg,.plain,.font,.console,.blobd{
+    .fg,.plain,.font,.console,.blobd,.borderd{
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -379,6 +382,48 @@
     else if(localStorage.getItem('blob')==='false'){
         document.querySelector('.blur').style.display='none';
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    let isborder = localStorage.getItem('isborder') === "true" ;
+
+    let h6ww = document.querySelector(".borderc");
+    function updateH6Stateqwqw() {
+        if (isborder) {
+            h6ww.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
+            h6ww.innerHTML = 'True';
+            h6ww.style.webkitBackgroundClip = 'text';
+            h6ww.style.webkitTextFillColor = 'transparent';
+        } else {
+            h6ww.innerHTML = 'False';
+            h6ww.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+            h6ww.style.webkitBackgroundClip = 'text';
+            h6ww.style.webkitTextFillColor = 'transparent';
+        }
+
+    }
+
+
+
+    document.querySelector('.borderb').addEventListener('click', () => {
+        isborder = !isborder;
+        localStorage.setItem('isborder', isborder);
+
+
+        updateH6Stateqwqw();
+    });
+
+
+    updateH6Stateqwqw();
 
 
 

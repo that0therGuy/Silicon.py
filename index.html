@@ -226,6 +226,11 @@ https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
 
         localStorage.setItem('isplain','false')
     }
+    if (localStorage.getItem('isborder')==null){
+
+        localStorage.setItem('isborder','false')
+    }
+
     if (localStorage.getItem('iscustom')==null){
 
         localStorage.setItem('iscustom','false')
@@ -982,7 +987,17 @@ def input(prompt_text=""):
 
         return result.candidates?.[0]?.content?.parts?.[0]?.text ?? "No response.";
     }
+    if (localStorage.getItem('isborder')==='true'){
 
+        document.querySelector('#consoleOutput').style.border='2px solid #01435b'
+        document.querySelector('.CodeMirror').style.border='2px solid #01435b'
+
+
+    }else{
+
+        document.querySelector('#consoleOutput').style.border='none'
+        document.querySelector('.CodeMirror').style.border='none'
+    }
 
 
 
