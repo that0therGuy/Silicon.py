@@ -124,6 +124,10 @@ if (localStorage.getItem('font')==null){
 
     localStorage.setItem('font','3')
 }
+if (localStorage.getItem('bg')==null){
+
+    localStorage.setItem('bg','3')
+}
 let autocompleteEnabled = localStorage.getItem('issugg') === 'true';
 
 if (localStorage.getItem('isgem')=='false'){
@@ -143,8 +147,42 @@ let editor = CodeMirror(document.getElementById('editor'), {
     extraKeys: {
         "F10": function(cm) {
             cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-            document.querySelector('.CodeMirror').style.background='linear-gradient(to top left, rgba(31, 0, 52, .2) 0%, rgba(47,0,70,1) 100%)'
-            document.querySelector('.CodeMirror').style.backdropFilter='blur(20px)';
+
+            if (localStorage.getItem('bg')==1){
+                document.querySelector('.CodeMirror').style.setProperty('background-image', "url('space.jpg')", 'important');
+                document.querySelector('.CodeMirror').style.setProperty('background-size', "cover", 'important');
+
+
+
+
+            }
+            else if (localStorage.getItem('bg')==2){
+                document.querySelector('.CodeMirror').style.setProperty('background-image', "url('xp.jpg')", 'important');
+                document.querySelector('.CodeMirror').style.setProperty('background-size', "cover", 'important');
+
+
+
+
+            }
+            else if (localStorage.getItem('bg')==5){
+                document.querySelector('.CodeMirror').style.setProperty('background-image', "url('city.jpg')", 'important');
+                document.querySelector('.CodeMirror').style.setProperty('background-size', "cover", 'important');
+
+
+
+
+            }
+            else if (localStorage.getItem('bg')==4){
+                document.querySelector('.CodeMirror').style.setProperty('background-image', "url('forest.jpg')", 'important');
+                document.querySelector('.CodeMirror').style.setProperty('background-size', "cover", 'important');
+
+
+
+
+            }else if (localStorage.getItem('bg')==3){
+                document.querySelector('.CodeMirror').style.backdropFilter='blur(20px)';
+
+            }
 
 
 
@@ -154,10 +192,12 @@ let editor = CodeMirror(document.getElementById('editor'), {
             document.querySelector('.CodeMirror').style.background='linear-gradient(to top left, rgba(31, 0, 52, 0.2) 0%, rgba(47,0,70,1) 100%)'
             document.querySelector('.CodeMirror').style.backdropFilter='none';
 
+
         }
     }
 
 });
+
 
 
 
@@ -883,10 +923,47 @@ if (localStorage.getItem('isborder')==='true'){
 
 
 
+const bg = localStorage.getItem('bg');
+if (bg) {
+    const style = document.createElement('style');
+    let css = '';
 
+    if (bg == '1') {
+        css = `
+            .CodeMirror {
+                background-image: url('space.jpg') !important;
+                background-size: cover !important;
+            }
+        `;
+    } else if (bg == '2') {
+        css = `
+            .CodeMirror {
+                background-image: url('xp.jpg') !important;
+                background-size: cover !important;
+            }
+        `;
+    } else if (bg == '5') {
+        css = `
+            .CodeMirror {
+                background-image: url('city.jpg') !important;
+                background-size: cover !important;
+            }
+        `;
+    } else if (bg == '4') {
+        css = `
+            .CodeMirror {
+                background-image: url('forest.jpg') !important;
+                background-size: cover !important;
+                
+            }
+        `;
+    }
 
-
-
+    if (css) {
+        style.innerHTML = css;
+        document.head.appendChild(style);
+    }
+}
 
 
 

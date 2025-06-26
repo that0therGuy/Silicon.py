@@ -12,16 +12,25 @@
 
 <div class="container" style="gap:20px;height:fit-content;margin-top:5%;">
     <H1 ><span>🔮</span> Styles</H1>
+    <div class="borderd">
+        <button class="borderb">Borders</button> <h5 class="borderc">False</h5>
+    </div>
     <div class="fg" >
         <button class="bloom">Extra bloom</button><h6 class="bloomc">False</h6>
 
     </div>
+    <div class="bgd">
+        <button class="bgb">Editor Background</button> <h5 class="bgc">Blur Glass</h5>
+    </div>
     <div class="plain">
         <button class="plainb">Plain coloured Text Editor</button> <h6 class="plainc">False</h6>
     </div>
+
     <div class="console">
         <button class="consoleb">Console output position</button> <h5 class="consolec">Center</h5>
     </div>
+
+
     <div class="font">
         <button class="fontb">Change Font</button><h5 class="fontc">Jetbrains Mono</h5>
     </div>
@@ -31,9 +40,7 @@
     <div class="blobd">
         <button class="blobb">The Blob</button> <h5 class="blobc">True</h5>
     </div>
-    <div class="borderd">
-        <button class="borderb">Borders</button> <h5 class="borderc">False</h5>
-    </div>
+
     <h5>You can style it further using Javascript!</h5>
 
     <a href="index.html">< Back to editor > </a>
@@ -42,7 +49,7 @@
     .container{
         height:100svh;
     }
-    .fg,.plain,.font,.console,.blobd,.borderd{
+    .fg,.plain,.font,.console,.blobd,.borderd,.bgd{
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -424,6 +431,77 @@
 
 
     updateH6Stateqwqw();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    let bg=''
+    if (localStorage.getItem('bg')!=null) {
+        bg = localStorage.getItem('bg');
+    }else{
+        bg=3
+    }
+
+
+    let h6111a = document.querySelector(".bgc");
+    function updateH6State4zz() {
+        if (bg==1) {
+            h6111a.innerHTML = 'Space';
+        }
+        else if(bg==2){
+            h6111a.innerHTML = 'Windows XP';
+
+        }
+        else if(bg==4){
+            h6111a.innerHTML = 'Forest';
+
+        }
+        else if(bg==5){
+            h6111a.innerHTML = 'Sakura';
+
+        }
+        else {
+
+            h6111a.innerHTML = 'Blur Glass';
+        }
+
+    }
+
+
+    document.querySelector('.bgb').addEventListener('click', () => {
+        if(bg==5){
+            bg=1
+        }else{
+            bg++
+        }
+        localStorage.setItem('bg', bg);
+
+
+        updateH6State4zz();
+    });
+
+
+    updateH6State4zz();
 
 
 
