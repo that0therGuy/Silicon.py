@@ -31,7 +31,6 @@ let files= new Map([
 ])
 
 
-let tensorflow = tf
 document.querySelector('body').classList.add("animate2");
 
 
