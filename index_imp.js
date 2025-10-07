@@ -893,7 +893,6 @@ document.querySelector('.gemini').addEventListener('click',()=>{
 
 
 })
-})
 
 async function askGeminiWithUserKey(promptText) {
     const key = localStorage.getItem("key");
