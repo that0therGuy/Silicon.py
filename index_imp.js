@@ -234,6 +234,7 @@ function savekey(){
 
 editor.setValue(localStorage.getItem('code'));
 document.querySelector('.inputfile').addEventListener('change',function(){
+
     let fileread= new FileReader()
     fileread.onload=()=>{
 
@@ -963,6 +964,14 @@ if (bg) {
                 background-image: url('forest.jpg') !important;
                 background-size: cover !important;
                 
+            }
+        `;
+    } else if (bg == '6') {
+        css = `
+            .CodeMirror {
+                background-image: url('desert.png') !important;
+                background-size: cover !important;
+
             }
         `;
     }

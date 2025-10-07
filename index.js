@@ -1,4 +1,4 @@
-let letters= 'QWERTYUIOPASDFGHJKLZXCVBNM.qwertyuiopasdfghjklzxcvbnm'
+﻿let letters= 'QWERTYUIOPASDFGHJKLZXCVBNM.qwertyuiopasdfghjklzxcvbnm'
 
 function this_is_madness_(){
     console.log('You chose death.')
