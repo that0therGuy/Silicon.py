@@ -857,33 +857,42 @@ else if(localStorage.getItem('blob')==='false'){
 }
 document.querySelector('.gemini').addEventListener('click',()=>{
 
-    let prom= prompt('Ask Gemini (be concise and short): ')
-    if (prom.trim()==''){
-        return
-    }
-    let output=''
-    askGeminiWithUserKey(
-        `following prompt must only be answered formally, if you are writing code ,DO NOT ATTEMPT TO FORMAT CODE JUST SEND AS PLAIN TEXT. If asked for code, only give code, nothing else. If asked to change or modify the code given or generate code, end the response with 'oo23349-0bvbvvdichloride',IF THE USER ASKS FOR IMPOSSIBLE CODE OR YOU MUST TYPE SOMETHING OTHER THAN CODE (TOO IMPORTANT TO NOT WRITE) DO NOT END THE RESPONSE WITH THE CODE.. act  without mentioning any command before :\n code (code is always python, please dont use formatting techniques like '\`\`\` python '): ${editor.getValue()} \n` + prom
-    ).then(value => {
-        let output = value;
 
-        if (output.includes('oo23349-0bvbvvdichloride')) {
-            output = output.replace('oo23349-0bvbvvdichloride', "");
-
-            const lines = output.split('\n');
-
-            if (lines.length > 2 && lines[0].includes('```python')) {
-                output = lines.slice(1, -1).join('\n');
-            }
-
-            editor.setValue(output);
-        } else {
-            document.querySelector('#consoleOutput').innerText = '';
-            console.log("𝔾𝕖𝕞𝕚𝕟𝕚'𝕤 ℝ𝕖𝕤𝕡𝕠𝕟𝕤𝕖: \n" + value);
+    swal('Give Gemini an instruction:',{
+        content: 'input',
+        button:'->',
+    })
+    .then((value)=>{
+        if (value.trim()==''){
+            return
         }
-    });
+        let output=''
+        askGeminiWithUserKey(
+            `following prompt must only be answered formally, if you are writing code ,DO NOT ATTEMPT TO FORMAT CODE JUST SEND AS PLAIN TEXT. If asked for code, only give code, nothing else. If asked to change or modify the code given or generate code, end the response with 'oo23349-0bvbvvdichloride',IF THE USER ASKS FOR IMPOSSIBLE CODE OR YOU MUST TYPE SOMETHING OTHER THAN CODE (TOO IMPORTANT TO NOT WRITE) DO NOT END THE RESPONSE WITH THE CODE.. act  without mentioning any command before :\n code (code is always python, please dont use formatting techniques like '\`\`\` python '): ${editor.getValue()} \n` + value
+        ).then(value => {
+            let output = value;
+
+            if (output.includes('oo23349-0bvbvvdichloride')) {
+                output = output.replace('oo23349-0bvbvvdichloride', "");
+
+                const lines = output.split('\n');
+
+                if (lines.length > 2 && lines[0].includes('```python')) {
+                    output = lines.slice(1, -1).join('\n');
+                }
+
+                editor.setValue(output);
+            } else {
+                document.querySelector('#consoleOutput').innerText = '';
+                console.log("𝔾𝕖𝕞𝕚𝕟𝕚'𝕤 ℝ𝕖𝕤𝕡𝕠𝕟𝕤𝕖: \n" + value);
+            }
+        });
+    })
 
 
+
+
+})
 })
 
 async function askGeminiWithUserKey(promptText) {

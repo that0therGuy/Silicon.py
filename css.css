@@ -611,3 +611,47 @@ html, body {
     height: 100% !important;
 }
 
+.swal-modal {
+  background: linear-gradient(to top left, rgb(0, 95, 156,.3) 0%, rgb(0, 98, 122,.3) 100%);
+  border:1px solid #2EA8C7;
+  backdrop-filter:blur(2px);
+  color: cyan;
+}
+.swal-text{
+    color: #2EA8C7;
+}
+.swal-content,.swal-footer{
+    display:inline-block !important;
+    margin:0;
+
+}
+.swal-footer{
+    margin-bottom:35px;
+}
+.swal-button {
+    background: linear-gradient(90deg,rgba(69, 166, 204, 1) 0%, rgba(0, 117, 128, 1) 100%) !important;
+    text-align:center;
+    margin:0;
+    height: 30px;
+    padding:0;
+    padding-left:20px;
+    padding-right:20px;
+    color:#033F57;
+
+
+
+}
+.swal-content__input, .swal-text input{
+    background: linear-gradient(90deg,rgba(69, 166, 204, 1) 0%, rgba(0, 117, 128, 1) 100%);
+    border: none;
+    outline: none;
+    padding: 7px;
+    border-radius: 3px;
+    text-align: center;
+    color:#033F57;
+    caret-color:#033F57;
+    width:110%;
+    display:inline;
+    height: 30px;
+
+}
