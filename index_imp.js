@@ -884,7 +884,7 @@ code (code is always python, please dont use formatting techniques like '\`\`\` 
                     editor.setValue(output);
                 } else {
                     document.querySelector('#consoleOutput').innerText = '';
-                    console.log("𝔸𝕀 𝕤𝕒𝕪𝕤::\n" + response);
+                    console.log("\n\n\n𝔸𝕀 𝕤𝕒𝕪𝕤::\n" + response);
                 }
             });
         });
