@@ -73,7 +73,7 @@ const topsecret= 'you found easter egg #2!'
 
 if (localStorage.getItem('code')==null){
 
-    localStorage.setItem('code',`#Refer < info > for useful info!\nprint('hello world')`)
+    localStorage.setItem('code',`#Refer < info > for useful info!\nprint('hello beautiful.')`)
 }
 if (localStorage.getItem('consolep')==null){
 
