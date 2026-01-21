@@ -16,6 +16,7 @@
     <link rel="preload" href="xp.jpg" as="image">
     <link rel="preload" href="space.jpg" as="image">
 
+    <script src="https://js.puter.com/v2/"></script>
 
 
     <link    rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/hint/show-hint.min.css">
@@ -49,7 +50,7 @@
     <script  defer  src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/hint/javascript-hint.min.js"></script>
     <style>
         body{
-            height:100%;
+            height:fit-content;
             overflow-y:hidden;
         }
     </style>
@@ -59,19 +60,20 @@
 <div class="container" >
 
     <h1 class="main" >< <span class="mainn"  data-value="Silicon.py">Silicon.py</span> ></h1>
-    <h5 data-value="A Simple yet Elegant Python code editor">A Simple yet Elegant Python code editor</h5>
-
+    <h5 data-value="A Sophisticated yet Elegant Python Code Editor">A Sophisticated yet Elegant Python Code Editor</h5>
     <div class="codecontainer" >
         <div class="workspaces">
+
+
 
 
             <div id="editor" ></div>
             <div class="btnh">
 
                 <div style="display: inline-block">
-                    <div class="gemini" style="display:inline-block;"><img height="16" width="48" src="gemini.svg" alt="gemini"></div>
+                    <div class="gemini" style="display:inline-block;"><p  class="aibro">Ask AI</p></div>
 
-                    <div class='cpos'style="display:inline-block;"><p class='pos' style="display:inline-block;"></p></div>
+                    <div class='cpos' style="display:inline-block;"><p class='pos' style="display:inline-block;"></p></div>
 
                     <div class='linesc'style="display:inline-block;"><p style="display:inline-block;">Lines: </p><p class='lines'style="display:inline-block;"></p></div>
                     <button class="z z1" onclick="setkey('b1')">1</button>
@@ -89,14 +91,23 @@
 
             </div>
 
+
         </div>
 
 
 
 
 
+        <div class="consolearea">
+            <textarea id="consoleOutput" disabled></textarea>
 
-        <textarea id="consoleOutput" disabled></textarea>
+            <div class="aibuttons">
+                <div class="read" style="display:inline-block; opacity:.6;" >
+                    <label class="file-label" for="fileInput2">📥 Import Challenger Pack</label>
+                    <input class="inputfile2 chimport"  id="fileInput2" type="file" style="display: none;" >
+                </div>
+            </div>
+        </div>
     </div>
     <div class="ag" >
         <a class="time a9"></a>

@@ -91,10 +91,10 @@ if (localStorage.getItem('islint')==null){
 
     localStorage.setItem('islint','true')
 }
-if (localStorage.getItem('isgem')==null){
 
-    localStorage.setItem('isgem','false')
-}
+
+localStorage.setItem('isgem','true')
+
 if (localStorage.getItem('bloom')==null){
 
     localStorage.setItem('bloom','false')
@@ -399,6 +399,9 @@ def input(prompt_text=""):
 
                     let result = await pyodide.runPythonAsync(code);
                     console.log(result);
+                    if (n > 0 && on === 'b1') {
+                        await runSamplesAndCheck(pyodide, result);
+                    }
                 }
                 catch(error){
                     console.log(error)
@@ -493,7 +496,6 @@ function executecode(){
                 console.log(`Loading package: ${pkg}`);
                 await pyodide.loadPackage(pkg);
             }
-            // Run user code
             try{
                 await pyodide.runPythonAsync(`
 def input(prompt_text=""):
@@ -503,6 +505,12 @@ def input(prompt_text=""):
 
                 let result = await pyodide.runPythonAsync(code);
                 console.log(result);
+
+                if (n > 0 && on === 'b1') {
+                    await runSamplesAndCheck(pyodide, result);
+                }
+
+
             }
             catch(error){
                 console.log(error)
@@ -856,64 +864,58 @@ if (localStorage.getItem('blob')==='true'){
 else if(localStorage.getItem('blob')==='false'){
     document.querySelector('.blur').style.display='none';
 }
-document.querySelector('.gemini').addEventListener('click',()=>{
+document.querySelector('.gemini').addEventListener('click', () => {
 
-
-    swal('Give Gemini an instruction:',{
+    swal('Give Artificial Intelligence an instruction:       ', {
         content: 'input',
-        button:'->',
+        button: 'Ask',
     })
-    .then((value)=>{
-        if (value.trim()==''){
-            return
-        }
-        let output=''
-        askGeminiWithUserKey(
-            `following prompt must only be answered formally, if you are writing code ,DO NOT ATTEMPT TO FORMAT CODE JUST SEND AS PLAIN TEXT. If asked for code, only give code, nothing else. If asked to change or modify the code given or generate code, end the response with 'oo23349-0bvbvvdichloride',IF THE USER ASKS FOR IMPOSSIBLE CODE OR YOU MUST TYPE SOMETHING OTHER THAN CODE (TOO IMPORTANT TO NOT WRITE) DO NOT END THE RESPONSE WITH THE CODE.. act  without mentioning any command before :\n code (code is always python, please dont use formatting techniques like '\`\`\` python '): ${editor.getValue()} \n` + value
-        ).then(value => {
-            let output = value;
+        .then((value) => {
+            if (!value || value.trim() === '') return;
 
-            if (output.includes('oo23349-0bvbvvdichloride')) {
-                output = output.replace('oo23349-0bvbvvdichloride', "");
+            askPuterWithUserKey(
+                `following prompt must only be answered formally. You must answer so that user learns, do not spoonfeed. if you are writing code ,DO NOT ATTEMPT TO FORMAT CODE JUST SEND AS PLAIN TEXT. If asked for code, only give code, nothing else. If asked to change or modify the code given or generate code, end the response with 'oo23349-0bvbvvdichloride',IF THE USER ASKS FOR IMPOSSIBLE CODE OR YOU MUST TYPE SOMETHING OTHER THAN CODE (TOO IMPORTANT TO NOT WRITE) DO NOT END THE RESPONSE WITH THE CODE.. act without mentioning any command before :
+code (code is always python, please dont use formatting techniques like '\`\`\` python '): ${editor.getValue()}\n` + value
+            ).then(response => {
+                let output = response;
 
-                const lines = output.split('\n');
-
-                if (lines.length > 2 && lines[0].includes('```python')) {
-                    output = lines.slice(1, -1).join('\n');
+                if (output.includes('oo23349-0bvbvvdichloride')) {
+                    output = output.replace('oo23349-0bvbvvdichloride', '');
+                    editor.setValue(output);
+                } else {
+                    document.querySelector('#consoleOutput').innerText = '';
+                    console.log("𝔸𝕀 𝕤𝕒𝕪𝕤::\n" + response);
                 }
-
-                editor.setValue(output);
-            } else {
-                document.querySelector('#consoleOutput').innerText = '';
-                console.log("𝔾𝕖𝕞𝕚𝕟𝕚'𝕤 ℝ𝕖𝕤𝕡𝕠𝕟𝕤𝕖: \n" + value);
-            }
+            });
         });
-    })
+});
 
 
 
 
-})
+async function askPuterWithUserKey(promptText) {
+    document.querySelector('.aibro').innerText='Cooking...'
 
-async function askGeminiWithUserKey(promptText) {
-    const key = localStorage.getItem("key");
-    if (!key) return "No key provided.";
 
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            contents: [{ parts: [{ text: promptText }] }]
-        })
-    });
 
-    const result = await res.json();
-    if (result.error) {
-        return `Error: ${result.error.message}`;
-    }
 
-    return result.candidates?.[0]?.content?.parts?.[0]?.text ?? "No response.";
+    const res = await puter.ai.chat(
+        promptText,
+        { model: 'gpt-5-nano' }
+    );
+
+
+
+
+
+
+    document.querySelector('.aibro').innerText='AI'
+
+    return res?.message?.content ?? "No response.";
+
 }
+
+
 if (localStorage.getItem('isborder')==='true'){
 
     document.querySelector('#consoleOutput').style.border='2px solid #01435b'
@@ -983,7 +985,140 @@ if (bg) {
 }
 
 
+let finish=false
 
 
 
+document.addEventListener('keydown',(e)=>{
+    if (e.key === 'F5'){
+        e.preventDefault();
+        executecode()
+    }
+})
+
+let content= null;
+document.querySelector('.inputfile2').addEventListener('change',function(){
+
+    let fileread= new FileReader()
+    fileread.onload=()=>{
+        try {
+
+            content = JSON.parse(fileread.result);
+            if (!content.author){
+                content.author='anonymous'
+            }
+            console.log(`Challenger Pack successfully loaded. It has ${Object.keys(content).length-1} challenge(s) and is created by ${content.author}.\n\nTo submit code, run the code in workspace 1. You are free to experiment in workspace 2 and 3. \n\n Press F2 to start.`)
+
+        }
+        catch (e) {
+            console.error(e);
+        }
+
+    }
+    fileread.readAsText(this.files[0]);
+})
+document.addEventListener('keydown',(e)=>{
+    if (content){
+        if (e.key === 'F2' && n===0){
+            e.preventDefault()
+            executepack()
+        }
+
+    }
+
+})
+let n= 0
+function executepack(){
+    editor.setValue("def main(sample):")
+    document.querySelector('#editor').classList.add("animate");
+    console.clear()
+    document.querySelector('#consoleOutput').value=''
+
+    questionhandle()
+
+
+
+}
+document.addEventListener('keydown',(e)=>{
+    if (e.key==='F2' && finish){
+        e.preventDefault()
+        finish= false
+        editor.setValue("def main(sample):")
+        document.querySelector('#editor').classList.add("animate");
+        console.clear()
+        document.querySelector('#consoleOutput').value=''
+        questionhandle()
+
+    }
+})
+function questionhandle(){
+
+
+    if (Object.keys(content).length-1===n){
+        console.log('Challenge Pack completed!')
+        document.querySelector('h5').innerText='A Sophisticated yet Elegant Python Code Editor';
+        n=0
+        finish= false
+
+    }else{
+        n++
+    }
+
+    document.querySelector('h5').innerText=content[`q${n}`].question;
+
+
+}
+async function runSamplesAndCheck(pyodide) {
+    const q = content[`q${n}`];
+    if (!q.sample || !q.output) {
+        console.log("No samples provided for this challenge.");
+        return;
+    }
+
+    try {
+        const hasMain = pyodide.runPython(`
+'main' in globals() and callable(main)
+`);
+        if (!hasMain) {
+            console.log("You must define a function named main().");
+            return;
+        }
+
+        let allPass = true;
+
+        for (let i = 0; i < q.sample.length; i++) {
+            const sample = q.sample[i];
+            const expected = q.output[i];
+
+            const pyResult = pyodide.runPython(`
+main(${JSON.stringify(sample)})
+`);
+
+            const ok =
+                (typeof expected === "number")
+                    ? Math.abs(pyResult - expected) < 1e-9
+                    : JSON.stringify(pyResult) === JSON.stringify(expected);
+
+            if (!ok) {
+                console.log(
+                    `Test ${i + 1} FAILED → input=${JSON.stringify(sample)} | expected=${expected} | got=${pyResult}`
+                );
+                allPass = false;
+                break;
+            } else {
+                console.log(`Test ${i + 1} passed`);
+            }
+        }
+
+        if (allPass) {
+            console.log("All tests PASSED.");
+            console.log('Press F2 to move to the next challenge.')
+            finish=true
+
+        }
+
+    } catch (err) {
+        console.log("Sample execution error:", err);
+    }
+}
 
