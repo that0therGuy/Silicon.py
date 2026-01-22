@@ -298,8 +298,6 @@ function checkforplain(){
 }
 checkforplain()
 document.querySelector('#consoleOutput').value ='';
-// Redirection of console.log to textarea
-// Redirection of console.log to textarea
 (function() {
     const originalLog = console.log;
     const output = document.querySelector('#consoleOutput');
@@ -323,9 +321,12 @@ document.querySelector('#consoleOutput').value ='';
 
 
 
-// Initialize CodeMirror editor
 if (localStorage.getItem('isauto')=='false'){
     document.querySelector('.main').addEventListener('click',()=>{
+        if (document.querySelector('.plotlink')){
+            document.querySelector('.plotlink').style.display='none';
+
+        }
         document.querySelectorAll('div[id*="matplotlib"]').forEach(div => div.remove());
 
         localStorage.setItem('code',editor.getValue());
@@ -341,7 +342,6 @@ if (localStorage.getItem('isauto')=='false'){
             async function main(code) {
                 const pyodide = await loadPyodide();
 
-                // List of Pyodide packages you support loading
                 const availablePackages = [
                     "numpy", "scipy", "pandas", "matplotlib", "sympy",
                     "scikit-learn", "statsmodels", "numba", "bokeh", "seaborn",
@@ -350,7 +350,6 @@ if (localStorage.getItem('isauto')=='false'){
                     "xgboost", "micropip", "pytest", "setuptools"
                 ];
 
-                // Extract top-level imports from code (simple regex)
                 function extractImports(code) {
                     const imports = new Set();
                     const lines = code.split('\n');
@@ -358,13 +357,11 @@ if (localStorage.getItem('isauto')=='false'){
                     for (const line of lines) {
                         const trimmed = line.trim();
                         if (trimmed.startsWith("import ")) {
-                            // e.g. "import pandas, numpy as np"
                             trimmed.slice(7).split(",").forEach(part => {
                                 const base = part.trim().split(" ")[0].split('.')[0];
                                 if (base) imports.add(base);
                             });
                         } else if (trimmed.startsWith("from ")) {
-                            // e.g. "from pandas.core.frame import DataFrame"
                             const parts = trimmed.split(" ");
                             if (parts.length >= 2) {
                                 const base = parts[1].split('.')[0];
@@ -379,18 +376,24 @@ if (localStorage.getItem('isauto')=='false'){
 
 
 
-                // Find which packages to load
                 const userImports = extractImports(code);
                 const packagesToLoad = userImports.filter(pkg => availablePackages.includes(pkg));
                 console.log(packagesToLoad)
 
-                // Load packages sequentially (can be optimized with Promise.all)
                 for (const pkg of packagesToLoad) {
                     console.log(`Loading package: ${pkg}`);
                     await pyodide.loadPackage(pkg);
                 }
+                try{
 
-                // Run user code
+                    await pyodide.runPythonAsync(`
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    `)}catch (e) {
+                    
+                }
+
                 try{
                     await pyodide.runPythonAsync(`
 def input(prompt_text=""):
@@ -400,6 +403,40 @@ def input(prompt_text=""):
 
                     let result = await pyodide.runPythonAsync(code);
                     console.log(result);
+
+                    try {
+                        const b64 = pyodide.runPython(`
+import io, base64
+buf = io.BytesIO()
+plt.savefig(buf, format="png")
+plt.close()
+base64.b64encode(buf.getvalue()).decode("utf-8")
+`);
+
+                        const byteCharacters = atob(b64);
+                        const byteNumbers = new Array(byteCharacters.length);
+                        for (let i = 0; i < byteCharacters.length; i++) {
+                            byteNumbers[i] = byteCharacters.charCodeAt(i);
+                        }
+
+                        const byteArray = new Uint8Array(byteNumbers);
+                        const blob = new Blob([byteArray], { type: "image/png" });
+                        const url = URL.createObjectURL(blob);
+
+                        const link = document.createElement("a");
+                        link.href = url;
+                        link.target = "_blank";
+                        link.textContent = "< Open plot in new tab >";
+                        link.style.display = "block";
+                        link.style.marginTop = "8px";
+                        link.classList.add("plotlink");
+
+
+                        document.querySelector(".consolearea").appendChild(link);
+                    } catch (e) {
+                    }
+
+
                     if (n > 0 && on === 'b1') {
                         await runSamplesAndCheck(pyodide, result);
                     }
@@ -439,6 +476,8 @@ def input(prompt_text=""):
 }
 function executecode(){
 
+    document.querySelectorAll(".consolearea img").forEach(i => i.remove());
+
     localStorage.setItem('code',editor.getValue());
     const code = editor.getValue();
     try {
@@ -449,9 +488,9 @@ function executecode(){
             document.querySelector('#consoleOutput').value +='\n<'+d.getHours()+': '+d.getMinutes()+': '+d.getSeconds()+'>\n';
         }
         async function main(code) {
+
             const pyodide = await loadPyodide();
 
-            // List of Pyodide packages you support loading
             const availablePackages = [
                 "numpy", "scipy", "pandas", "matplotlib", "sympy",
                 "scikit-learn", "statsmodels", "numba", "bokeh", "seaborn",
@@ -467,13 +506,11 @@ function executecode(){
                 for (const line of lines) {
                     const trimmed = line.trim();
                     if (trimmed.startsWith("import ")) {
-                        // e.g. "import pandas, numpy as np"
                         trimmed.slice(7).split(",").forEach(part => {
                             const base = part.trim().split(" ")[0].split('.')[0];
                             if (base) imports.add(base);
                         });
                     } else if (trimmed.startsWith("from ")) {
-                        // e.g. "from pandas.core.frame import DataFrame"
                         const parts = trimmed.split(" ");
                         if (parts.length >= 2) {
                             const base = parts[1].split('.')[0];
@@ -488,15 +525,24 @@ function executecode(){
 
 
 
-            // Find which packages to load
             const userImports = extractImports(code);
             const packagesToLoad = userImports.filter(pkg => availablePackages.includes(pkg));
             console.log(packagesToLoad)
-            // Load packages sequentially (can be optimized with Promise.all)
             for (const pkg of packagesToLoad) {
                 console.log(`Loading package: ${pkg}`);
                 await pyodide.loadPackage(pkg);
             }
+            try{
+                await pyodide.runPythonAsync(`
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+`)
+            }catch (e) {
+                
+            }
+            
+
             try{
                 await pyodide.runPythonAsync(`
 def input(prompt_text=""):
@@ -506,6 +552,39 @@ def input(prompt_text=""):
 
                 let result = await pyodide.runPythonAsync(code);
                 console.log(result);
+
+                try {
+                    const b64 = pyodide.runPython(`
+import io, base64
+buf = io.BytesIO()
+plt.savefig(buf, format="png")
+plt.close()
+base64.b64encode(buf.getvalue()).decode("utf-8")
+`);
+
+                    const byteCharacters = atob(b64);
+                    const byteNumbers = new Array(byteCharacters.length);
+                    for (let i = 0; i < byteCharacters.length; i++) {
+                        byteNumbers[i] = byteCharacters.charCodeAt(i);
+                    }
+
+                    const byteArray = new Uint8Array(byteNumbers);
+                    const blob = new Blob([byteArray], { type: "image/png" });
+                    const url = URL.createObjectURL(blob);
+
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.target = "_blank";
+                    link.textContent = "< Open plot in new tab >";
+                    link.style.display = "block";
+                    link.style.marginTop = "8px";
+                    link.classList.add("plotlink");
+
+                    document.querySelector(".consolearea").appendChild(link);
+                } catch (e) {
+                }
+
+
 
                 if (n > 0 && on === 'b1') {
                     await runSamplesAndCheck(pyodide, result);
@@ -994,6 +1073,10 @@ let finish=false
 document.addEventListener('keydown',(e)=>{
     if (e.key === 'F5'){
         e.preventDefault();
+        if (document.querySelector('.plotlink')){
+            document.querySelector('.plotlink').style.display='none';
+
+        }
         executecode()
     }
 })
