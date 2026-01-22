@@ -11,8 +11,6 @@ support, aesthetics, a heavenly coding experience and Challenge Packs**.
 
 I hope you enjoy my product. Thanks and have fun coding! 🤩
 
-Project last updated on **22/1/26**
-
 ------------------------------------------------------------------------
 
 ## Code Editor:
