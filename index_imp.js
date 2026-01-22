@@ -73,7 +73,7 @@ const topsecret= 'you found easter egg #2!'
 
 if (localStorage.getItem('code')==null){
 
-    localStorage.setItem('code',`#Refer < info > for useful info!\nprint('hello beautiful.')`)
+    localStorage.setItem('code',`#Refer < info > for useful info!\nprint('hello world')`)
 }
 if (localStorage.getItem('consolep')==null){
 
@@ -881,9 +881,10 @@ code (code is always python, please dont use formatting techniques like '\`\`\` 
 
                 if (output.includes('oo23349-0bvbvvdichloride')) {
                     output = output.replace('oo23349-0bvbvvdichloride', '');
+
                     editor.setValue(output);
                 } else {
-                    document.querySelector('#consoleOutput').innerText = '';
+                    document.querySelector('#consoleOutput').innerHTML = '';
                     console.log("\n\n\n𝔸𝕀 𝕤𝕒𝕪𝕤::\n" + response);
                 }
             });
@@ -901,7 +902,7 @@ async function askPuterWithUserKey(promptText) {
 
     const res = await puter.ai.chat(
         promptText,
-        { model: 'gpt-5-nano' }
+        { model: 'gpt-5.2-codex' }
     );
 
 
@@ -909,9 +910,9 @@ async function askPuterWithUserKey(promptText) {
 
 
 
-    document.querySelector('.aibro').innerText='AI'
+    document.querySelector('.aibro').innerText='Ask AI'
 
-    return res?.message?.content ?? "No response.";
+    return res?.message?.content ?? "*sigh* (error). If this is your first time using this AI, this is a predicted outcome. Refresh the page and it will work.";
 
 }
 
@@ -1052,20 +1053,24 @@ document.addEventListener('keydown',(e)=>{
     }
 })
 function questionhandle(){
+    let lengthofcontent=Object.keys(content).length-1
 
-
-    if (Object.keys(content).length-1===n){
+    if (lengthofcontent===n){
         console.log('Challenge Pack completed!')
         document.querySelector('h5').innerText='A Sophisticated yet Elegant Python Code Editor';
         n=0
         finish= false
+        document.querySelector('h5').style.letterSpacing='0px'
+
 
     }else{
         n++
     }
 
-    document.querySelector('h5').innerText=content[`q${n}`].question;
+    document.querySelector('h5').innerText=`${content[`q${n}`].question} [${n}/${lengthofcontent}]`;
+    document.querySelector('h5').style.transition='all .5s'
 
+    document.querySelector('h5').style.letterSpacing='2px'
 
 }
 async function runSamplesAndCheck(pyodide) {
