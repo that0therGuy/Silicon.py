@@ -18,7 +18,7 @@ I hope you enjoy my product. Thanks and have fun coding! 🤩
 Click inside the editor and press **F10** to make editor go
 **fullscreen.**
 
-Either use **F5** or press or the header to run your code. **Code is
+Either use **F5** or press the header to run your code. **Code is
 saved after it runs.**
 
 Use **CTRL + Left Click** for **multi-cursor editing.**
