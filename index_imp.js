@@ -139,6 +139,7 @@ if (localStorage.getItem('isgem')=='false'){
 let editor = CodeMirror(document.getElementById('editor'), {
     mode: "python",
     theme: "default",
+    indentUnit: 4,
     lineNumbers: true,
     autoCloseBrackets: true,
     matchBrackets: true,

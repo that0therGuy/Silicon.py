@@ -83,7 +83,6 @@ body{
 
 
 h1,h5{
-    user-select: none;
 }
 h1,h5,a{
     background: linear-gradient(90deg, rgba(219,219,219,1) 0%, rgba(31, 154, 255, 0.8) 100%);
@@ -235,12 +234,17 @@ button:hover{
 }
 
 @media only screen and (max-width: 600px) {
+    .linesc,.cpos,.scrolltod,.gemini,.read,.efff,.z{
+        font-size: 10px;
+        margin:0;
+    }
     .codecontainer{
         flex-direction: column;
 
     }
     body{
-        height:fit-content;
+        height:100% !important;
+        overflow-y:scroll !important;
     }
     textarea,#editor{
         width:80vw;
@@ -249,6 +253,14 @@ button:hover{
         height:auto;
 
 
+
+    }
+    #consoleOutput{
+        margin:0;
+        width:80vw;
+        max-width:90vw;
+        resize: vertical;
+        height:40vh;
 
     }
     textarea{
@@ -268,6 +280,24 @@ button:hover{
     .container{
         justify-content: flex-start;
     }
+    .time{
+        display: none;
+    }
+    a{
+        padding:5px;
+        border:1px solid #264875;
+        border-radius:5px;
+        font-size: 12px;
+        margin-bottom:5px;
+
+    }
+    .ag{
+        gap:0;
+    }
+    .btnh{
+        width:80vw;
+    }
+
 
 
 
