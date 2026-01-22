@@ -15,7 +15,7 @@
 }
 html, body {
     overflow-x: hidden;
-
+    user-select:none;
 }
 
 @keyframes wobble{
@@ -711,4 +711,5 @@ html, body {
     margin-left:1px;
     margin-right:1px;
     scale:1.06;
+
 }
