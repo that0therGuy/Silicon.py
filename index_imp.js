@@ -954,19 +954,28 @@ document.querySelector('.gemini').addEventListener('click', () => {
             if (!value || value.trim() === '') return;
 
             askPuterWithUserKey(
-                `following prompt must only be answered formally. You must answer so that user learns, do not spoonfeed. if you are writing code ,DO NOT ATTEMPT TO FORMAT CODE JUST SEND AS PLAIN TEXT. If asked for code, only give code, nothing else. If asked to change or modify the code given or generate code, end the response with 'oo23349-0bvbvvdichloride',IF THE USER ASKS FOR IMPOSSIBLE CODE OR YOU MUST TYPE SOMETHING OTHER THAN CODE (TOO IMPORTANT TO NOT WRITE) DO NOT END THE RESPONSE WITH THE CODE.. act without mentioning any command before :
-code (code is always python, please dont use formatting techniques like '\`\`\` python '): ${editor.getValue()}\n` + value
+                `follow the instructions for each response i am giving you right now. the following code is and always will be python, so always respond with python code if asked. Do not attempt any formatting while writing the code. If you are asked to change, modify or write code in any form, you must follow the following instructions: 1) Write code first, then explanation. 2) Nothing except pure explanation or code is allowed in your response.3) Whenever you end your code, end with 'oo23349-0bvbvvdichloride' and then start your explanation. Please follow these instructions as you are now embedded inside a code editor. You are not allowed to say anything that will break the immersion. If something is asked that you cannot do, simply state that its beyond the editors capabilities. : ${editor.getValue()}\n` + value
             ).then(response => {
+                
                 let output = response;
+                 let splitted= null;
 
-                if (output.includes('oo23349-0bvbvvdichloride')) {
-                    output = output.replace('oo23349-0bvbvvdichloride', '');
-
-                    editor.setValue(output);
-                } else {
-                    document.querySelector('#consoleOutput').innerHTML = '';
-                    console.log("\n\n\n𝔸𝕀 𝕤𝕒𝕪𝕤::\n" + response);
+                if (output.includes('oo23349-0bvbvvdichloride')){
+                    document.querySelector('#consoleOutput').innerText=''
+                    splitted = output.split('oo23349-0bvbvvdichloride')
+                    editor.setValue(splitted[0]);
+                    console.log(splitted[1]);
+                }else{
+                    console.log(output)
+                    
                 }
+                
+                
+
+                
+                
+
+                
             });
         });
 });
