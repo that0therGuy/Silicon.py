@@ -83,7 +83,6 @@ body{
 
 
 h1,h5{
-    user-select:none;
 }
 h1,h5,a{
     background: linear-gradient(90deg, rgba(219,219,219,1) 0%, rgba(31, 154, 255, 0.8) 100%);
@@ -336,7 +335,8 @@ button:hover{
 
 }
 ::selection{
-    background-color: #003c80;
+    background-color: #034751 !important;
+    color:white;
 }
 .sp_link{
     background: linear-gradient(90deg, rgb(74, 182, 229) 0%, rgba(65, 124, 234, 0.8) 100%);
