@@ -179,6 +179,7 @@
     isdbl= localStorage.getItem('isdbl')==='true';
     updateH6State()
   }
+  let false_grad= 'linear-gradient(90deg, rgb(255, 132, 132) 0%, rgba(255, 149, 108, 0.8) 100%)'
 
   function updateH6State() {
     if (isdbl) {
@@ -188,7 +189,7 @@
       h6.style.webkitTextFillColor = 'transparent';
     } else {
       h6.innerHTML = 'False';
-      h6.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
+      h6.style.background = false_grad;
       h6.style.webkitBackgroundClip = 'text';
       h6.style.webkitTextFillColor = 'transparent';
     }
