@@ -254,9 +254,9 @@ function checkforbloom(){
         document.querySelector('#consoleOutput').style.boxShadow='0 0 25px rgba(12, 0, 100, .4)';
 
     }else{
-        document.querySelector("#editor").style.boxShadow='0 0 25px rgba(12, 0, 40, 0.3)'
+        document.querySelector("#editor").style.boxShadow='    0 0 25px rgba(0, 12, 25, 0.3)'
 
-        document.querySelector("#consoleOutput").style.boxShadow='0 0 25px rgba(12, 0, 40, 0.3)'
+        document.querySelector("#consoleOutput").style.boxShadow='    0 0 25px rgba(0, 12, 25, 0.3)'
     }
     /*if (localStorage.getItem('mode')==='true'){
         document.querySelector('h1').style.webkitBackgroundClip = 'text';
@@ -954,7 +954,7 @@ document.querySelector('.gemini').addEventListener('click', () => {
             if (!value || value.trim() === '') return;
 
             askPuterWithUserKey(
-                `follow the instructions for each response i am giving you right now. the following code is and always will be python, so always respond with python code if asked. Do not attempt any formatting while writing the code. If you are asked to change, modify or write code in any form, you must follow the following instructions: 1) Write code first, then explanation. 2) Nothing except pure explanation or code is allowed in your response.3) Whenever you end your code, end with 'oo23349-0bvbvvdichloride' and then start your explanation. If you think you are asked only to explain or give a response without using code, do not use the codeword i had mentioned before in any part of your response. Please follow these instructions as you are now embedded inside a code editor. You are not allowed to say anything that will break the immersion. If something is asked that you cannot do, simply state that its beyond the editors capabilities. You are not to spoonfeed and explain clearly if asked. : ${editor.getValue()}\n` + value
+                `follow the instructions for each response i am giving you right now. the following code is and always will be python, so always respond with python code if asked. Do not attempt any formatting while writing the code. If you are asked to change, modify or write code in any form, you must follow the following instructions: 1) Write code first, then explanation. 2) Nothing except pure explanation or code is allowed in your response.3) Whenever you end your code, end with 'oo23349-0bvbvvdichloride' and then start your explanation. If you think you are asked only to explain or give a response without using code, do not use the codeword i had mentioned before in any part of your response. Please follow these instructions as you are now embedded inside a code editor. You are not allowed to say anything that will break the immersion. If something is asked that you cannot do, simply state that its beyond the editors capabilities. You are not to spoonfeed and explain clearly if asked. You are also provided with output of the code. If it is not an error in the ouptput or specified by the user to check the output, you are to ignore the output values. : ${editor.getValue()}\n. OUTPUT (IF ANY): ${document.querySelector('#consoleOutput').value}\n (output ended)\n\n` + value
             ).then(response => {
                 
                 let output = response;
@@ -963,7 +963,7 @@ document.querySelector('.gemini').addEventListener('click', () => {
                 if (output.includes('oo23349-0bvbvvdichloride')){
                     document.querySelector('#consoleOutput').innerText=''
                     splitted = output.split('oo23349-0bvbvvdichloride')
-                    editor.setValue(splitted[0]);
+                    editor.setValue(('#the code has been changed by AI. CTRL+Z to undo.\n'+splitted[0]));
                     console.log(splitted[1]);
                 }else{
                     console.log(output)
@@ -991,7 +991,7 @@ async function askPuterWithUserKey(promptText) {
 
     const res = await puter.ai.chat(
         promptText,
-        { model: 'gpt-5.2-codex' }
+        { model: 'gpt-5.3-codex' }
     );
 
 

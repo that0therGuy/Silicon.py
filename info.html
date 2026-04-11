@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+
     <meta charset="UTF-8">
     <link rel="icon" href="img.png" type="image/x-icon">
     <title>Info</title>
@@ -21,6 +27,8 @@
 <div class="container" style="gap:20px;height:fit-content;margin-top:5%;">
     <div>
         <H1><span>🔍</span> Info</H1>
+        <a style="margin:20px;" href="index.html" >< Back to editor > </a>
+
 
     </div>
     <br>
@@ -32,8 +40,12 @@
         <h5>Silicon.py aims to deliver <span style="text-decoration: underline">true sandbox coding experience</span> for students, researchers and anyone who would like to experiment and tinker with code.<br><br> Major strengths of using Silicon.py include having <span style="text-decoration: underline">multiple library support, aesthetics, a heavenly coding experience and Challenge Packs</span>.<br><br> I hope you enjoy my product. Thanks and have fun coding! <span>🤩</span></span></h5>
         <br>
 
-        <h5>Project last updated on <span style="text-decoration: underline">24/1/26</span></h5>
+        <h5>Project last updated on <span style="text-decoration: underline">11/4/26</span></h5>
         <br>
+        <br>
+
+        <br>
+
         <h5 class="headq">Code Editor:</h5>
         <br>
         <br>
@@ -48,8 +60,12 @@
         <br>
         <h5>You can swipe numbers to increase/decrease and booleans are toggle-able by clicking. These are the beta-features.</h5>
         <br>
-        <h5><span style="text-decoration: underline">Top of the line AI (gpt-5.2-codex)</span> is integrated within the application. Use it <span style="text-decoration: underline">(for free!)</span> to your advantage to generate and understand code.</h5>
+        <h5><span style="text-decoration: underline">GPT 5.3 Codex</span> is integrated within the application. Use it <span style="text-decoration: underline">(for free!)</span> to your advantage to generate and understand code.</h5>
         <br>
+        <br>
+
+        <br>
+
         <h5 class="headq">Challenge Packs:</h5>
         <br>
         <br>
@@ -59,20 +75,39 @@
         <br>
         <h5>A challenge pack looks like this:</h5>
         <br>
-        <img src="Screenshot_1.png" style="height:50%;width:50%;border-radius:10px;border:1px solid #809eea;">
+        <pre> <code class="language-js">
+{
+  "q1": {
+    "question": "A function that returns the sum of a list's items.",
+    "output": [7,0,1,4.2],
+    "sample": [[2,4,1],[0],[1,0],[3.2,1]]
+  },
+  "q2": {
+    "question": "A function that returns the product of a list's items.",
+    "output": [8,0,0,3.2],
+    "sample": [[2,4,1],[0],[1,0],[3.2,1]]
+  },
+  "author": "that0therguy"
+}
+        </code>
+</pre>
         <br>
         <br>
         <h5>The JSON file should contain author key and questions 1, 2, 3 in form of q1,q2,q3.<br><br> In each q(number) object, there should be a question key that narrates the problem, the sample which contains the input that the app will test the user's code on and output which should be the answer to each sample.</h5>
         <br>
         <h5>Challenge Packs are still not finished and you may encounter bugs.</h5>
+        <br>
+
+        <h1 style="opacity: 0;">lol</h1>
+
+
     </div>
 
-    <a href="index.html">< Back to editor > </a>
+
 </div>
 <style>
 .info{
     width:75vw;
-    height:fit-content;
 }
 h5{
     font-size:1em;
@@ -91,9 +126,21 @@ a{
     border-radius:5px;
 
 }
+pre code{
+    text-wrap: auto;
+    padding:15px;
+    border:1px solid #52f7fd;
+    border-radius:5px;
+    background: linear-gradient(to top left, rgb(112, 195, 198) 0%, rgb(149, 189, 214) 100%) !important;
+
+
+    width:fit-content;
+}
 
 </style>
+<script>hljs.highlightAll();</script>
 <script>
+
     document.body.onpointermove= event=>{
         const {clientX,clientY}= event
         document.querySelector('.blur').animate({
