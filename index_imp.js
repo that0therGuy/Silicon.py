@@ -1106,6 +1106,7 @@ document.querySelector('.inputfile2').addEventListener('change',function(){
         }
         catch (e) {
             console.error(e);
+            console.log(e)
         }
 
     }
