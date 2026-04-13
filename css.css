@@ -518,7 +518,7 @@ input[type=number] {
 p{
     margin-right:5px;
 }
-.linesc,.cpos,.scrolltod,.gemini,.read,.efff{
+.linesc,.cpos,.scrolltod,.gemini,.read,.efff,.chimport{
     border:2px solid rgb(0, 58, 100);
     padding:4px;
     border-radius:4px;
@@ -548,9 +548,7 @@ p{
 .scrolltod{
     transition: all .5s ;
 }
-.cpos,.scrolltod{
-    opacity: .7;
-}
+
 .file{
     transition: all .5s;
 }
