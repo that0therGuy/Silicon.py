@@ -35,7 +35,7 @@ html, body {
 @keyframes backg{
 
     0%{
-        filter: blur(5px);
+        filter:grayscale(100%);
 
 
 
