@@ -712,6 +712,6 @@ html, body {
 .linesc,.cpos{
     opacity:.7;
 }
-.file{
+.file,.read{
     opacity:1;
 }
