@@ -378,49 +378,7 @@
 
 
 
-  let h6ge = document.querySelector(".gemc");
-  if (localStorage.getItem('isgem')==null){
-    isgem= false
-    localStorage.setItem('isgem','false')
-
-  }else{
-    isgem= localStorage.getItem('isgem')==='true';
-    updateH6Stategg()
-  }
-
-  function updateH6Stategg() {
-    if (isgem) {
-      h6ge.style.background = 'linear-gradient(90deg, rgb(207, 255, 205) 0%, rgba(61, 255, 31, 0.8) 100%)';
-      h6ge.innerHTML = 'True';
-      h6ge.style.webkitBackgroundClip = 'text';
-      h6ge.style.webkitTextFillColor = 'transparent';
-    } else {
-      h6ge.innerHTML = 'False';
-      h6ge.style.background = 'linear-gradient(90deg, rgb(255, 205, 205) 0%, rgba(117, 0, 0, 0.8) 100%)';
-      h6ge.style.webkitBackgroundClip = 'text';
-      h6ge.style.webkitTextFillColor = 'transparent';
-    }
-
-  }
-  updateH6Stategg()
-  document.querySelector('.gemkey').value=localStorage.getItem('key')
-
-  function gemini(){
-
-    isgem=!isgem;
-    if (isgem==false){
-      localStorage.removeItem('key');
-      document.querySelector('.gemkey').value='';
-    }
-    localStorage.setItem('isgem',isgem);
-    updateH6Stategg()
-
-  }
-  document.querySelector('.gemb').addEventListener('click',()=>{
-    gemini()
-
-  })
-
+ 
 
 
 
