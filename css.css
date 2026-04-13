@@ -578,6 +578,7 @@ p{
     width:2rem;
     text-align: center;
     height:9px;
+    display:none;
 
 }
 .scrollto:focus{
