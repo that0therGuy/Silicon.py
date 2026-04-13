@@ -58,7 +58,7 @@ other on different platforms.
 
 **Great Coding**
 ![Great Coding](2.png)
-*Using Matplotlib in Silicon.py with Chrome Tab Splitscreen.*
+*Using Matplotlib in Silicon.py with Firefox Tab Splitscreen.*
 
 
 **Great Immersion**
