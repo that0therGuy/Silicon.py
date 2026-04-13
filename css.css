@@ -18,7 +18,21 @@ html, body {
 
 }
 
-@keyframes wobble{
+@keyframes blur_workspace_change{
+
+    0%{
+        filter: blur(5px);
+        backdrop-filter: grayscale(25%);
+
+    }
+    100%{
+        filter: none;
+        backdrop-filter: grayscale(0%);
+
+    }
+}
+
+@keyframes blink_workspace_change{
 
     0%{
         filter: blur(5px) brightness(50%);
@@ -32,6 +46,19 @@ html, body {
     }
 }
 
+@keyframes misc_workspace_change{
+
+    0%{
+        filter: blur(5px) brightness(50%);
+        backdrop-filter: grayscale(25%);
+
+    }
+    100%{
+        filter: none;
+        backdrop-filter: grayscale(0%);
+
+    }
+}
 @keyframes backg{
 
     0%{
@@ -49,7 +76,7 @@ html, body {
     }
 }
 .animate{
-    animation:wobble .3s ease;
+    animation:blur_workspace_change .3s ease;
 }
 .animate2{
     animation:backg .7s ease;
