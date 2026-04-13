@@ -1,8 +1,4 @@
-if (localStorage.getItem('roomid')){
-    document.querySelector('.leaveroomdiv').style.display='inline-block'
-    document.querySelector('h5').innerText= `You are currently in Room ${localStorage.getItem('roomid')}`
-    initCollab(localStorage.getItem('roomid'),localStorage.getItem('roomidname'))
-}
+
 if (localStorage.getItem('work_ani')==null){
 
     localStorage.setItem('work_ani','3')
@@ -229,7 +225,14 @@ let editor = CodeMirror(document.getElementById('editor'), {
 });
 
 
+let inCollab = false;
 
+if (localStorage.getItem('roomid')){
+    document.querySelector('.leaveroomdiv').style.display = 'inline-block'
+    document.querySelector('h5').innerText = `You are currently in Room ${localStorage.getItem('roomid')}`
+    inCollab = true;
+    initCollab(localStorage.getItem('roomid'), localStorage.getItem('roomidname'))
+}
 
 editor.on("inputRead", function (cm, change) {
     if (!autocompleteEnabled || cm.state.completionActive) return;
@@ -254,9 +257,9 @@ function setkey(key){
 }
 
 function savekey(){
-    localStorage.setItem(on,editor.getValue())
+    if (inCollab) return;
+    localStorage.setItem(on, editor.getValue())
 }
-
 
 
 
