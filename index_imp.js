@@ -966,7 +966,7 @@ document.querySelector('.gemini').addEventListener('click', () => {
                     editor.setValue(('#the code has been changed by AI. CTRL+Z to undo.\n'+splitted[0]));
                     console.log('\nAI responds with:\n'+splitted[1]);
                 }else{
-                    console.log(output)
+                    console.log('\nAI responds with:\n'+output);
                     
                 }
                 
