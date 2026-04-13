@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <link rel="icon" href="img.png" type="image/x-icon">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <title>Settings</title>
+  <link rel="stylesheet" href="css.css">
+  <style>
+
+
+    a{
+      margin-bottom: 20px;
+    }
+    a{
+      padding:5px;
+      border:1px solid #264875;
+      border-radius:5px;
+
+    }
+    h1{
+      margin:0;
+    }
+    .roomsChoice{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap:25px;
+
+    }
+    .joinbutton,.createbutton{
+      display:flex;
+      flex-direction: column;
+      gap:5px;
+    }
+    .swal-modal {
+      background: linear-gradient(to top left, rgb(0, 95, 156, .3) 0%, rgb(0, 98, 122, .3) 100%);
+      border: 1px solid #2EA8C7;
+      backdrop-filter: blur(2px);
+      color: cyan;
+      overflow: hidden; /* prevents input from breaking out */
+    }
+
+    .swal-text {
+      color: #2EA8C7;
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+
+    .swal-content, .swal-footer {
+      display: block !important; /* changed from inline-block to block */
+      margin: 0;
+      text-align: center;
+    }
+
+    .swal-footer {
+      margin-bottom: 35px;
+    }
+
+    .swal-button {
+      background: linear-gradient(90deg, rgba(69, 166, 204, 1) 0%, rgba(0, 117, 128, 1) 100%) !important;
+      text-align: center;
+      margin: 0;
+      height: 30px;
+      padding: 0 20px;
+      color: #033F57;
+    }
+
+    .swal-content__input, .swal-text input {
+      background: linear-gradient(90deg, rgba(69, 166, 204, 1) 0%, rgba(0, 117, 128, 1) 100%);
+      border: none;
+      outline: none;
+      padding: 7px;
+      border-radius: 3px;
+      text-align: center;
+      color: #033F57;
+      caret-color: #033F57;
+      width: 80%;
+      display: block;
+      margin: 0 auto;
+      margin-top:10px;
+
+      height: 30px;
+      box-sizing: border-box;
+    }
+
+
+
+
+
+  </style>
+
+</head>
+<body>
+<div class="blur"></div>
+
+<div class="container" style="gap:20px;height:fit-content;margin-top:5%;">
+  <div class="top">
+    <h1>Rooms</h1>
+    <a style="margin:20px;" href="index.html" >< Back to editor > </a>
+  </div>
+
+
+  <div class="roomsChoice">
+    <div class="joinbutton">
+      <h5>Join a Room?</h5>
+      <button onclick="joinRoom()">Join Room</button>
+    </div>
+    <div class="createbutton">
+      <h5>Create a Room?</h5>
+      <button onclick="createRoom()">Create Room</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="rooms.js">
+
+</script>
+</body>
+</html>

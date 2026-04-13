@@ -270,7 +270,7 @@ button:hover{
 }
 
 @media only screen and (max-width: 600px) {
-    .linesc,.cpos,.scrolltod,.gemini,.read,.efff,.z{
+    .linesc,.cpos,.scrolltod,.gemini,.read,.efff,.z,.roomsbuttondiv,.leaveroomdiv{
         font-size: 10px;
         margin:0;
     }
@@ -554,7 +554,7 @@ input[type=number] {
 p{
     margin-right:5px;
 }
-.linesc,.cpos,.scrolltod,.gemini,.read,.efff,.chimport{
+.linesc,.cpos,.scrolltod,.gemini,.read,.efff,.chimport,.roomsbuttondiv,.leaveroomdiv{
     border:2px solid rgb(0, 58, 100);
     padding:4px;
     border-radius:4px;
@@ -598,11 +598,11 @@ p{
 
 
 }
-.gemini{
+.gemini,.roomsbuttondiv,.leaveroomdiv{
     transition: all .5s;
 }
 
-.gemini:hover{
+.gemini:hover,.roomsbuttondiv:hover,,.leaveroomdiv:hover{
     margin-left:1px;
     margin-right:1px;
     scale:1.06;
@@ -754,4 +754,7 @@ html, body {
 }
 .file,.read{
     opacity:1;
+}
+.leaveroomdiv{
+    display:none !important;
 }

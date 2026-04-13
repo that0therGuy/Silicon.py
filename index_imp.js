@@ -1,3 +1,8 @@
+if (localStorage.getItem('roomid')){
+    document.querySelector('.leaveroomdiv').style.display='inline-block'
+    document.querySelector('h5').innerText= `You are currently in Room ${localStorage.getItem('roomid')}`
+    initCollab(localStorage.getItem('roomid'),localStorage.getItem('roomidname'))
+}
 if (localStorage.getItem('work_ani')==null){
 
     localStorage.setItem('work_ani','3')
@@ -1245,3 +1250,29 @@ main(${JSON.stringify(sample)})
     }
 }
 
+async function initCollab(newcode,name) {
+
+    const Y = await import('https://esm.sh/yjs')
+    const { WebrtcProvider } = await import('https://esm.sh/y-webrtc')
+    const { CodemirrorBinding } = await import('https://esm.sh/y-codemirror')
+
+    const ydoc = new Y.Doc()
+    const provider = new WebrtcProvider(newcode, ydoc)
+    const ytext = ydoc.getText('codemirror')
+    provider.awareness.setLocalStateField('user', {
+        name: name,
+        color: 'rgba(4,44,32,0.94)'
+    })
+    const binding = new CodemirrorBinding(ytext, editor, provider.awareness)
+    provider.on('status', e => console.log('collab:', e.status))
+}
+
+
+
+document.querySelector('.leaveroomdiv').addEventListener('click', e => {
+    localStorage.removeItem('roomid')
+    localStorage.removeItem('roomidname')
+    document.querySelector('.leaveroomdiv').style.display = 'none'
+    location.reload()
+
+})
