@@ -75,8 +75,14 @@ html, body {
 
     }
 }
-.animate{
+.animate_blur{
     animation:blur_workspace_change .3s ease;
+}
+.animate_blink{
+    animation:blink_workspace_change .3s ease;
+}
+.animate_misc{
+    animation:misc_workspace_change .3s ease;
 }
 .animate2{
     animation:backg .7s ease;
