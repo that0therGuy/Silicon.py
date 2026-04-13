@@ -710,3 +710,6 @@ html, body {
     margin-right:1px;
     scale:1.06;
 }
+.linesc,.cpos{
+    opacity:.7;
+}
