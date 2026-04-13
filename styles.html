@@ -36,6 +36,9 @@
     <div class="font">
         <button class="fontb">Change Font</button><h5 class="fontc">Jetbrains Mono</h5>
     </div>
+    <div class="workspaced">
+        <button class="workspaceb">Change Font</button><h5 class="workspacec">Jetbrains Mono</h5>
+    </div>
     <div class="cursor">
         <button class="cursorb">Custom Cursor</button><h5 class="cursorc">Jetbrains Mono</h5>
     </div>
@@ -49,7 +52,7 @@
     .container{
         height:100svh;
     }
-    .fg,.plain,.font,.console,.blobd,.borderd,.bgd{
+    .fg,.plain,.font,.console,.blobd,.borderd,.bgd,.workspaced{
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -514,6 +517,49 @@
 
     updateH6State4zz();
 
+
+
+
+
+
+    let work_ani=''
+    if (localStorage.getItem('work_ani')!=null) {
+        font = localStorage.getItem('font');
+    }else{
+        work_anit=3
+    }
+
+
+    function updateH6State4w() {
+        if (work_ani==1) {
+            document.querySelector('.workspacec').innerHTML = 'misc';
+        }
+        else if(work_ani==2){
+           document.querySelector('.workspacec').innerHTML = 'Blink';
+
+        }
+        else {
+
+            document.querySelector('.workspacec').innerHTML = 'Blur';
+        }
+
+    }
+
+
+    document.querySelector('.workspaceb').addEventListener('click', () => {
+        if(work_ani==3){
+            work_ani=1
+        }else{
+            work_ani++
+        }
+        localStorage.setItem('work_ani', work_ani);
+
+
+        updateH6State4w();
+    });
+
+
+    updateH6State4w();
 
 
 </script>
