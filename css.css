@@ -602,7 +602,7 @@ p{
     transition: all .5s;
 }
 
-.gemini:hover,.roomsbuttondiv:hover,,.leaveroomdiv:hover{
+.gemini:hover,.roomsbuttondiv:hover,.leaveroomdiv:hover{
     margin-left:1px;
     margin-right:1px;
     scale:1.06;
