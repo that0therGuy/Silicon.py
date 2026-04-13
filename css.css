@@ -757,4 +757,12 @@ html, body {
 }
 .leaveroomdiv{
     display:none;
+    background: linear-gradient(to top left, rgba(103, 51, 51, 0.87), rgba(94, 27, 27, 0.87)) ;
+    box-shadow: 6px 6px 25px rgba(195, 28, 28, 0.2);
+    border:1px solid #ff7676;
+    color: #ffc5c5;
+
+}
+.leaveroomdiv p{
+    color: #ffdbdb;
 }
