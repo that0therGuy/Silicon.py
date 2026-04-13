@@ -51,7 +51,7 @@ other on different platforms.
 
 ## Some lovely Screenshots:
 
-![Great Styling](Screenshot 2026-04-13 154254.png)
-![Great Coding](Screenshot 2026-04-13 155354.png)
-![Great Immersion](Screenshot 2026-04-13 154124.png)
+![Great Styling](Screenshot%202026-04-13%20154254.png)
+![Great Coding](Screenshot%202026-04-13%20155354.png)
+![Great Immersion](Screenshot%202026-04-13%20154124.png)
 
