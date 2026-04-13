@@ -31,7 +31,7 @@ xgboost, micropip, pytest, setuptools support inbuilt.
 You can swipe numbers to increase/decrease and booleans are toggle-able
 by clicking. These are the beta-features.
 
-**Top of the line AI (gpt-5.2-codex)** is integrated within the
+**(gpt-5.3-codex)** is integrated within the
 application. Use it **(for free!)** to your advantage to generate and
 understand code.
 
