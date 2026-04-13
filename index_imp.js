@@ -964,7 +964,7 @@ document.querySelector('.gemini').addEventListener('click', () => {
                     document.querySelector('#consoleOutput').innerText=''
                     splitted = output.split('oo23349-0bvbvvdichloride')
                     editor.setValue(('#the code has been changed by AI. CTRL+Z to undo.\n'+splitted[0]));
-                    console.log(splitted[1]);
+                    console.log('\nAI responds with:\n'+splitted[1]);
                 }else{
                     console.log(output)
                     
