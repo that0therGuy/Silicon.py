@@ -257,7 +257,7 @@ function setkey(key){
 }
 
 function savekey(){
-    if (inCollab) return;
+
     localStorage.setItem(on, editor.getValue())
 }
 
