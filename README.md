@@ -53,15 +53,15 @@ other on different platforms.
 
 
 **Great Styling**
-![Great Styling](Screenshot%202026-04-13%20154254.png)
+![Great Styling](1.png)
 
 
 **Great Coding**
-![Great Coding](Screenshot%202026-04-13%20155354.png)
+![Great Coding](2.png)
 *Using Matplotlib in Silicon.py with Chrome Tab Splitscreen.*
 
 
 **Great Immersion**
-![Great Immersion](Screenshot%202026-04-13%20154124.png)
+![Great Immersion](3.png)
 
 
