@@ -865,97 +865,102 @@ document.querySelector('.a9').addEventListener('mouseover', () => {
     document.querySelector('.a9').style.transform='translateY(-13px)'
     document.querySelector('.a0').style.transform='translateY(-6px)'
     document.querySelector('.a1').style.transform='translateY(-3px)'
-
 })
+
 document.querySelector('.a0').addEventListener('mouseover', () => {
     document.querySelector('.a9').style.transform='translateY(-6px)'
     document.querySelector('.a0').style.transform='translateY(-13px)'
     document.querySelector('.a1').style.transform='translateY(-6px)'
-    document.querySelector('.a2').style.transform='translateY(-3px)'
-
+    document.querySelector('.a5').style.transform='translateY(-3px)'
 })
+
 document.querySelector('.a1').addEventListener('mouseover', () => {
     document.querySelector('.a0').style.transform='translateY(-6px)'
     document.querySelector('.a1').style.transform='translateY(-13px)'
+    document.querySelector('.a5').style.transform='translateY(-6px)'
+    document.querySelector('.a2').style.transform='translateY(-3px)'
+})
+
+document.querySelector('.a5').addEventListener('mouseover', () => {
+    document.querySelector('.a1').style.transform='translateY(-6px)'
+    document.querySelector('.a0').style.transform='translateY(-3px)'
+    document.querySelector('.a5').style.transform='translateY(-13px)'
     document.querySelector('.a2').style.transform='translateY(-6px)'
     document.querySelector('.a3').style.transform='translateY(-3px)'
-
 })
+
 document.querySelector('.a2').addEventListener('mouseover', () => {
-    document.querySelector('.a0').style.transform='translateY(-3px)'
-    document.querySelector('.a1').style.transform='translateY(-6px)'
+    document.querySelector('.a5').style.transform='translateY(-6px)'
+    document.querySelector('.a1').style.transform='translateY(-3px)'
     document.querySelector('.a2').style.transform='translateY(-13px)'
     document.querySelector('.a3').style.transform='translateY(-6px)'
     document.querySelector('.a4').style.transform='translateY(-3px)'
+})
 
-})
 document.querySelector('.a3').addEventListener('mouseover', () => {
-    document.querySelector('.a1').style.transform='translateY(-3px)'
-    document.querySelector('.a2').style.transform='translateY(-6px)'
-    document.querySelector('.a3').style.transform='translateY(-13px)'
-    document.querySelector('.a4').style.transform='translateY(-6px)'
-})
-document.querySelector('.a3').addEventListener('mouseover', () => {
-    document.querySelector('.a1').style.transform='translateY(-3px)'
-    document.querySelector('.a2').style.transform='translateY(-6px)'
-    document.querySelector('.a3').style.transform='translateY(-13px)'
-    document.querySelector('.a4').style.transform='translateY(-6px)'
-})
-document.querySelector('.a4').addEventListener('mouseover', () => {
     document.querySelector('.a2').style.transform='translateY(-3px)'
+    document.querySelector('.a5').style.transform='translateY(-3px)' // removed, too far
+    document.querySelector('.a2').style.transform='translateY(-6px)'
+    document.querySelector('.a3').style.transform='translateY(-13px)'
+    document.querySelector('.a4').style.transform='translateY(-6px)'
+})
+
+document.querySelector('.a4').addEventListener('mouseover', () => {
     document.querySelector('.a3').style.transform='translateY(-6px)'
+    document.querySelector('.a2').style.transform='translateY(-3px)'
     document.querySelector('.a4').style.transform='translateY(-13px)'
 })
 
-document.querySelector('.a9').addEventListener('mouseout', () => {
-    document.querySelector('.a9').style.transform='translateY(0px)'
-    document.querySelector('.a0').style.transform='translateY(0px)'
-    document.querySelector('.a1').style.transform='translateY(0px)'
 
+// --- mouseout ---
+
+document.querySelector('.a9').addEventListener('mouseout', () => {
+    document.querySelector('.a9').style.transform='translateY(0)'
+    document.querySelector('.a0').style.transform='translateY(0)'
+    document.querySelector('.a1').style.transform='translateY(0)'
 })
 
 document.querySelector('.a0').addEventListener('mouseout', () => {
     document.querySelector('.a9').style.transform='translateY(0)'
-
     document.querySelector('.a0').style.transform='translateY(0)'
     document.querySelector('.a1').style.transform='translateY(0)'
-    document.querySelector('.a2').style.transform='translateY(0)'
-
+    document.querySelector('.a5').style.transform='translateY(0)'
 })
+
 document.querySelector('.a1').addEventListener('mouseout', () => {
     document.querySelector('.a0').style.transform='translateY(0)'
     document.querySelector('.a1').style.transform='translateY(0)'
-    document.querySelector('.a2').style.transform='translateY(0)'
-    document.querySelector('.a3').style.transform='translateY(0)'
-
-})
-document.querySelector('.a2').addEventListener('mouseout', () => {
-    document.querySelector('.a0').style.transform='translateY(0)'
-    document.querySelector('.a1').style.transform='translateY(0)'
-    document.querySelector('.a2').style.transform='translateY(0)'
-    document.querySelector('.a3').style.transform='translateY(0)'
-    document.querySelector('.a4').style.transform='translateY(0)'
-
-})
-document.querySelector('.a3').addEventListener('mouseout', () => {
-    document.querySelector('.a1').style.transform='translateY(0)'
-    document.querySelector('.a2').style.transform='translateY(0)'
-    document.querySelector('.a3').style.transform='translateY(0)'
-    document.querySelector('.a4').style.transform='translateY(0)'
     document.querySelector('.a5').style.transform='translateY(0)'
+    document.querySelector('.a2').style.transform='translateY(0)'
 })
-document.querySelector('.a3').addEventListener('mouseout', () => {
+
+document.querySelector('.a5').addEventListener('mouseout', () => {
+    document.querySelector('.a1').style.transform='translateY(0)'
+    document.querySelector('.a0').style.transform='translateY(0)'
+    document.querySelector('.a5').style.transform='translateY(0)'
+    document.querySelector('.a2').style.transform='translateY(0)'
+    document.querySelector('.a3').style.transform='translateY(0)'
+})
+
+document.querySelector('.a2').addEventListener('mouseout', () => {
+    document.querySelector('.a5').style.transform='translateY(0)'
     document.querySelector('.a1').style.transform='translateY(0)'
     document.querySelector('.a2').style.transform='translateY(0)'
     document.querySelector('.a3').style.transform='translateY(0)'
     document.querySelector('.a4').style.transform='translateY(0)'
 })
-document.querySelector('.a4').addEventListener('mouseout', () => {
+
+document.querySelector('.a3').addEventListener('mouseout', () => {
     document.querySelector('.a2').style.transform='translateY(0)'
     document.querySelector('.a3').style.transform='translateY(0)'
     document.querySelector('.a4').style.transform='translateY(0)'
 })
 
+document.querySelector('.a4').addEventListener('mouseout', () => {
+    document.querySelector('.a3').style.transform='translateY(0)'
+    document.querySelector('.a2').style.transform='translateY(0)'
+    document.querySelector('.a4').style.transform='translateY(0)'
+})
 
 document.body.onpointermove= event=>{
     const {clientX,clientY}= event
