@@ -1,4 +1,22 @@
-z_ani= 'blur'
+if (localStorage.getItem('work_ani')==null){
+
+    localStorage.setItem('work_ani','3')
+}
+
+if (localStorage.getItem('work_ani')=='3'){
+    z_ani= 'blur'
+
+}
+else if (localStorage.getItem('work_ani')=='1'){
+    z_ani= 'misc'
+
+}
+else if (localStorage.getItem('work_ani')=='2'){
+    z_ani= 'blink'
+
+}
+
+
 
 
 let interval = null;
