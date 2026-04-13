@@ -561,22 +561,19 @@
 
 
     updateH6State4w();
-function checkforworkani(){
-    
-
-    if (localStorage.getItem('work_ani')==1){
-        document.querySelector('.workspacec')=='Shrinkage'
+function checkforworkani() {
 
 
+    if (localStorage.getItem('work_ani') == 1) {
+        document.querySelector('.workspacec') == 'Shrinkage'
 
 
+    } else if (localStorage.getItem('work_ani') == 2) {
+        document.querySelector('.workspacec') == 'Blink'
+    } else if (localStorage.getItem('work_ani') == 3) {
+        document.querySelector('.workspacec') == 'Blur'
     }
-    if (localStorage.getItem('work_ani')==2){
-            document.querySelector('.workspacec')=='Blink'
-    }
-    if (localStorage.getItem('work_ani')==3){
-            document.querySelector('.workspacec')=='Blur'
-    }
+}
 checkforworkani()
 
 
