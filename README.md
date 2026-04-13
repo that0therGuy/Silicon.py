@@ -47,15 +47,11 @@ Still working on online functionality where users can post these packs
 in the application itself instead of sharing the JSON files with each
 other on different platforms.
 
-A challenge pack looks like this:
+------------------------------------------------------------------------
 
-![Challenge Pack Example](Screenshot_1.png)
+## Some lovely Screenshots:
 
-The JSON file should contain author key and questions 1, 2, 3 in form of
-q1,q2,q3.
+(Screenshot 2026-04-13 154254.png)
+(Screenshot 2026-04-13 155354.png)
+(Screenshot 2026-04-13 154124.png)
 
-In each q(number) object, there should be a question key that narrates
-the problem, the sample which contains the input that the app will test
-the user's code on and output which should be the answer to each sample.
-
-Challenge Packs are still not finished and you may encounter bugs.
