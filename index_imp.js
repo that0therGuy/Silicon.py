@@ -49,16 +49,16 @@ document.querySelector('.z1').addEventListener('click',()=>{
 
 
 })
+
 document.querySelector('.z2').addEventListener('click',()=>{
-    document.querySelector('#editor').classList.add("animate");
+    document.querySelector('#editor').style.animation='blur_workspace_change .3s ease';
 
 
-    document.querySelector('#editor').addEventListener("animationend", () => {
-        document.querySelector('#editor').classList.remove("animate");
-    });
+    
 
 
 })
+
 document.querySelector('.z3').addEventListener('click',()=>{
     document.querySelector('#editor').classList.add("animate");
 
