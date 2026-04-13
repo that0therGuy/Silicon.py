@@ -37,7 +37,7 @@
 
 
     <div class="font">
-        <button class="fontb">Change Font</button><h5 class="fontc">Jetbrains Mono</h5>
+        <button class="fontb">Font Family</button><h5 class="fontc">Jetbrains Mono</h5>
     </div>
 
     <div class="cursor">
@@ -561,20 +561,22 @@
 
 
     updateH6State4w();
-function checkforworkani() {
+    function checkforworkani() {
+        console.log('dfg');
 
 
-    if (localStorage.getItem('work_ani') == 1) {
-        document.querySelector('.workspacec') == 'Shrinkage'
+        if (localStorage.getItem('work_ani') === '1') {
+            console.log(true)
+            document.querySelector('.workspacec').innerHTML = 'Shrinkage'
 
 
-    } else if (localStorage.getItem('work_ani') == 2) {
-        document.querySelector('.workspacec') == 'Blink'
-    } else if (localStorage.getItem('work_ani') == 3) {
-        document.querySelector('.workspacec') == 'Blur'
+        } else if (localStorage.getItem('work_ani') === '2') {
+            document.querySelector('.workspacec').innerText = 'Blink'
+        } else if (localStorage.getItem('work_ani') === '3') {
+            document.querySelector('.workspacec').innerText = 'Blur'
+        }
     }
-}
-checkforworkani()
+    checkforworkani()
 
 
 
