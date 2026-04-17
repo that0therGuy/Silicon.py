@@ -52,58 +52,28 @@ function checkforfont(){
     }
 }
 checkforfont()
-function createRoom(){
-    localStorage.setItem('roomid',crypto.randomUUID())
-    swal('Enter your name:', {
-        content: 'input',
-        button: 'Lets Go',
-    })
+function createRoom() {
+    localStorage.setItem('roomid', crypto.randomUUID())
+    localStorage.setItem('roomrole', 'host')   // ← add this
+    swal('Enter your name:', { content: 'input', button: 'Lets Go' })
         .then((value) => {
-
-            if (!value || value.trim() === '') return;
-            localStorage.setItem('roomidname',value)
+            if (!value || value.trim() === '') return
+            localStorage.setItem('roomidname', value)
             document.querySelector('a').click()
-
-
-
-
-            }
-
-        )
+        })
 }
-function joinRoom(){
-    swal('Enter Room ID:', {
-        content: 'input',
-        button: 'Next',
-    })
+
+function joinRoom() {
+    swal('Enter Room ID:', { content: 'input', button: 'Next' })
         .then((value) => {
-            if (!value || value.trim() === '') return;
-            localStorage.setItem('roomid',value)
-            swal('Enter your name:', {
-                content: 'input',
-                button: 'Lets Go',
-            })
+            if (!value || value.trim() === '') return
+            localStorage.setItem('roomid', value)
+            localStorage.setItem('roomrole', 'guest')   // ← add this
+            swal('Enter your name:', { content: 'input', button: 'Lets Go' })
                 .then((value) => {
-
-                        if (!value || value.trim() === ''){
-                            return
-                        }
-                        localStorage.setItem('roomidname',value)
-                        document.querySelector('a').click()
-
-
-
-
-                    }
-
-                )
-
-
-
-            }
-
-
-
-        )
-
+                    if (!value || value.trim() === '') return
+                    localStorage.setItem('roomidname', value)
+                    document.querySelector('a').click()
+                })
+        })
 }

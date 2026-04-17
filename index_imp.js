@@ -1258,25 +1258,187 @@ main(${JSON.stringify(sample)})
     }
 }
 
-async function initCollab(newcode,name) {
-
+async function initCollab(roomId, name) {
     const Y = await import('https://esm.sh/yjs')
-    const { WebrtcProvider } = await import('https://esm.sh/y-webrtc')
     const { CodemirrorBinding } = await import('https://esm.sh/y-codemirror')
 
     const ydoc = new Y.Doc()
-    const provider = new WebrtcProvider(newcode, ydoc)
-    const ytext = ydoc.getText('codemirror')
-    provider.awareness.setLocalStateField('user', {
-        name: name,
-        color: 'rgba(4,44,32,0.94)'
+    const yText = ydoc.getText('codemirror')
+
+    const rtcConfig = { iceServers: [] }
+
+    let pc      = null
+    let dc      = null   // RTCDataChannel
+    let binding = null
+    let isHost  = false
+
+    function applyBinding() {
+        if (binding) return
+        binding = new CodemirrorBinding(yText, editor)
+        console.log(`[Collab] ✓ Connected to room "${roomId}" as ${name}`)
+    }
+
+    function setupDataChannel(channel) {
+        dc = channel
+        dc.binaryType = 'arraybuffer'
+
+        dc.onopen = () => {
+            applyBinding()
+            const update = Y.encodeStateAsUpdate(ydoc)
+            dc.send(update)
+        }
+
+        dc.onmessage = (e) => {
+            const data = e.data
+            if (data instanceof ArrayBuffer) {
+                Y.applyUpdate(ydoc, new Uint8Array(data), 'remote')
+            } else if (data instanceof Blob) {
+                data.arrayBuffer().then(buf =>
+                    Y.applyUpdate(ydoc, new Uint8Array(buf), 'remote')
+                )
+            }
+        }
+
+        dc.onclose = () => console.log('[Collab] Data channel closed')
+        dc.onerror = (e) => console.warn('[Collab] Data channel error', e)
+    }
+
+    ydoc.on('update', (update, origin) => {
+        if (origin !== 'remote' && dc && dc.readyState === 'open') {
+            dc.send(update)
+        }
     })
-    const binding = new CodemirrorBinding(ytext, editor, provider.awareness)
-    provider.on('status', e => console.log('collab:', e.status))
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).catch(() => prompt('Copy this SDP:', text))
+    }
+
+    function sdpDialog(title, placeholder, prefill = '') {
+        return new Promise(resolve => {
+            const overlay = document.createElement('div')
+            overlay.style.cssText = `
+                position:fixed;inset:0;background:rgba(0,0,0,.75);
+                display:flex;align-items:center;justify-content:center;z-index:9999`
+            overlay.innerHTML = `
+                <div style="background:#1e0035;border:1px solid #5a0090;border-radius:12px;
+                            padding:24px;width:min(520px,90vw);color:#e0c4ff;font-family:inherit">
+                    <p style="margin:0 0 10px;font-size:13px;opacity:.8;white-space:pre-line">${title}</p>
+                    <textarea id="_sdp_ta" rows="7" placeholder="${placeholder}" style="
+                        width:100%;box-sizing:border-box;background:#12002a;border:1px solid #5a0090;
+                        color:#e0c4ff;border-radius:8px;padding:10px;font-size:11px;
+                        font-family:monospace;resize:vertical">${prefill}</textarea>
+                    <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+                        ${prefill ? `<button id="_sdp_copy" style="padding:8px 16px;border-radius:6px;
+                            border:1px solid #5a0090;background:transparent;color:#e0c4ff;cursor:pointer">
+                            Copy</button>` : ''}
+                        <button id="_sdp_ok" style="padding:8px 16px;border-radius:6px;
+                            border:none;background:#7c00cc;color:#fff;cursor:pointer">
+                            ${prefill ? 'Done' : 'OK'}</button>
+                    </div>
+                </div>`
+            document.body.appendChild(overlay)
+            const ta = overlay.querySelector('#_sdp_ta')
+            overlay.querySelector('#_sdp_ok').onclick = () => {
+                document.body.removeChild(overlay)
+                resolve(ta.value.trim())
+            }
+            const copyBtn = overlay.querySelector('#_sdp_copy')
+            if (copyBtn) copyBtn.onclick = () => copyToClipboard(prefill)
+        })
+    }
+
+    function waitForICE(pc) {
+        return new Promise(res => {
+            if (pc.iceGatheringState === 'complete') return res()
+            pc.onicegatheringstatechange = () => {
+                if (pc.iceGatheringState === 'complete') res()
+            }
+            setTimeout(res, 3000)
+        })
+    }
+
+    async function startAsHost() {
+        isHost = true
+        pc = new RTCPeerConnection(rtcConfig)
+        setupDataChannel(pc.createDataChannel('yjs'))
+
+        pc.onicecandidate = () => {} // gather silently; we send after complete
+
+        const offer = await pc.createOffer()
+        await pc.setLocalDescription(offer)
+        await waitForICE(pc)
+
+        const offerStr = JSON.stringify(pc.localDescription)
+        copyToClipboard(offerStr)
+
+        const answerStr = await sdpDialog(
+            `📋 Your offer is copied — send it to the guest.\n\nRoom: ${roomId}  |  You: ${name}\n\nPaste the guest's answer below:`,
+            'Paste guest answer here…',
+            offerStr
+        )
+
+        if (!answerStr) return console.warn('[Collab] No answer received.')
+
+        try {
+            await pc.setRemoteDescription(JSON.parse(answerStr))
+            console.log('[Collab] Remote description set — waiting for channel…')
+        } catch (e) {
+            console.error('[Collab] Bad answer SDP:', e)
+        }
+    }
+
+    async function startAsGuest() {
+        pc = new RTCPeerConnection(rtcConfig)
+
+        // Guest receives the data channel from the host
+        pc.ondatachannel = (e) => setupDataChannel(e.channel)
+
+        pc.onicecandidate = () => {} // gather silently
+
+        // Ask guest to paste host's offer
+        const offerStr = await sdpDialog(
+            `Paste the host's offer below.\n\nRoom: ${roomId}  |  You: ${name}`,
+            'Paste host offer here…'
+        )
+
+        if (!offerStr) return console.warn('[Collab] No offer provided.')
+
+        try {
+            await pc.setRemoteDescription(JSON.parse(offerStr))
+        } catch (e) {
+            return console.error('[Collab] Bad offer SDP:', e)
+        }
+
+        const answer = await pc.createAnswer()
+        await pc.setLocalDescription(answer)
+        await waitForICE(pc)
+
+        const answerStr = JSON.stringify(pc.localDescription)
+        copyToClipboard(answerStr)
+
+        await sdpDialog(
+            `📋 Your answer is copied — send it back to the host.\n\nRoom: ${roomId}  |  You: ${name}`,
+            '',
+            answerStr
+        )
+    }
+
+
+    const role = localStorage.getItem('roomrole')   // 'host' | 'guest' | null
+    if (role === 'host') {
+        await startAsHost()
+    } else {
+        await startAsGuest()
+    }
 }
 
-
-
+document.querySelector('.leaveroomdiv').addEventListener('click', () => {
+    localStorage.removeItem('roomid')
+    localStorage.removeItem('roomidname')
+    localStorage.removeItem('roomrole')
+    document.querySelector('.leaveroomdiv').style.display = 'none'
+    location.reload()
+})
 document.querySelector('.leaveroomdiv').addEventListener('click', e => {
     localStorage.removeItem('roomid')
     localStorage.removeItem('roomidname')
