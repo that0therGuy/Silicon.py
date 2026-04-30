@@ -766,3 +766,52 @@ html, body {
 .leaveroomdiv p{
     color: #ffdbdb;
 }
+.quickstart_div{
+    z-index: 999999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+    width:100%;
+    position: absolute;
+}
+
+.quickstart{
+    display:none;
+    align-items: center;
+    gap:50px;
+    height:50vh;
+    width:50vw;
+    border:1px solid rgba(0, 117, 128, .6);
+    border-radius:5px;
+    position:absolute;
+    background-color: rgb(0 23 35 / 0.3);
+    backdrop-filter:blur(50px);
+    flex-direction: row;
+    padding:50px;
+    overflow: auto;
+    box-shadow:0 0 50px rgb(25 108 161 / 0.2);
+    transition:opacity .6s, transform 0.15s cubic-bezier(0.23, 1, 0.32, 1)!important;
+
+
+}
+
+
+ul{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    margin-top:50px;
+}
+.plol{
+    margin-top:50px;
+}
+.hello{
+    border-radius: 10px;
+}
+.quickstarttext{
+    display:flex;
+    flex-direction: column;
+
+
+}

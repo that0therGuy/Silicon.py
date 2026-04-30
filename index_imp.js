@@ -1,4 +1,3 @@
-
 if (localStorage.getItem('work_ani')==null){
 
     localStorage.setItem('work_ani','3')
@@ -15,6 +14,12 @@ else if (localStorage.getItem('work_ani')=='1'){
 else if (localStorage.getItem('work_ani')=='2'){
     z_ani= 'blink'
 
+}
+if (!localStorage.getItem('quickstart')){
+    document.querySelector('.quickstart').style.display='flex'
+    localStorage.setItem('quickstart','true')
+}else{
+    document.querySelector('.quickstart').style.display='none'
 }
 
 
@@ -1446,3 +1451,40 @@ document.querySelector('.leaveroomdiv').addEventListener('click', e => {
     location.reload()
 
 })
+dragElement(document.querySelector(".quickstart"));
+function dragElement(elmnt) {
+    elmnt.style.transition = 'transform 0.12s cubic-bezier(0.23, 1, 0.32, 1)';
+
+    document.addEventListener('mousemove', (e) => {
+        const rect = elmnt.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const dx = e.clientX - centerX;
+        const dy = e.clientY - centerY;
+
+        const maxShift = 20;
+        const radius = 800;
+
+        const shiftX = (dx / radius) * maxShift;
+        const shiftY = (dy / radius) * maxShift;
+
+        elmnt.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+    });
+
+    document.addEventListener('mouseleave', () => {
+        elmnt.style.transform = 'translate(0px, 0px)';
+    });
+}
+function removequickstart() {
+    goback().then(() => {
+        document.querySelector('.quickstart').style.display = 'none';
+        document.querySelector('.quickstart_div').style.display = 'none';
+    });
+}
+
+async function goback() {
+    document.querySelector('.quickstart').style.opacity = '0';
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+}
