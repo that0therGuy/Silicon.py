@@ -17,9 +17,11 @@ else if (localStorage.getItem('work_ani')=='2'){
 }
 if (!localStorage.getItem('quickstart')){
     document.querySelector('.quickstart').style.display='flex'
+    document.querySelector('.quickstart_div').style.display='flex'
     localStorage.setItem('quickstart','true')
 }else{
     document.querySelector('.quickstart').style.display='none'
+    document.querySelector('.quickstart_div').style.display='none'
 }
 
 
