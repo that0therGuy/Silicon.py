@@ -1485,6 +1485,7 @@ function removequickstart() {
 
 async function goback() {
     document.querySelector('.quickstart').style.opacity = '0';
+    document.querySelector('.quickstart_div').style.display='none';
 
     await new Promise(resolve => setTimeout(resolve, 1000));
 }
