@@ -424,41 +424,21 @@ if (localStorage.getItem('isauto')=='false'){
                     await pyodide.loadPackage(pkg);
                 }
                 try{
-                    
 
-                    pyodide.setStdout({
-                        
-                        batched: (text) => {
-                            document.querySelector('#consoleOutput').value += text + '\n';
-                        }
-                });
-
-await pyodide.runPythonAsync(`
-import sys
-
-def input(prompt_text=""):
-    sys.stdout.flush()
-    from js import prompt
-    return prompt(str(prompt_text) if prompt_text else "")
-`);}catch (e) {
+                    await pyodide.runPythonAsync(`
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    `)}catch (e) {
                     
                 }
 
                 try{
-pyodide.setStdout({
-    batched: (text) => {
-        document.querySelector('#consoleOutput').value += text + '\n';
-    }
-});
-
-await pyodide.runPythonAsync(`
-import sys
-
+                    await pyodide.runPythonAsync(`
 def input(prompt_text=""):
-    sys.stdout.flush()
     from js import prompt
-    return prompt(str(prompt_text) if prompt_text else "")
-`);;
+    return prompt(prompt_text)
+`);
 
                     let result = await pyodide.runPythonAsync(code);
                     console.log(result);
