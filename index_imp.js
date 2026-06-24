@@ -1,3 +1,4 @@
+
 if (localStorage.getItem('work_ani')==null){
 
     localStorage.setItem('work_ani','3')
@@ -297,27 +298,6 @@ function checkforbloom(){
 
         document.querySelector("#consoleOutput").style.boxShadow='    0 0 25px rgba(0, 12, 25, 0.3)'
     }
-    /*if (localStorage.getItem('mode')==='true'){
-        document.querySelector('h1').style.webkitBackgroundClip = 'text';
-        document.querySelector('h1').style.webkitTextFillColor = 'transparent';
-        document.querySelector('h5').style.webkitBackgroundClip = 'text';
-        document.querySelector('h5').style.webkitTextFillColor = 'transparent';
-        document.body.style.background='linear-gradient(to top left, rgba(0,0,0,1) 0%, rgba(47,0,70,1) 100%)';
-        document.querySelector('h5').style.background='linear-gradient(90deg, rgba(219,219,219,1) 0%, rgba(182,31,255,.8) 100%)';
-
-
-    }else{
-        document.querySelector('h1').style.background='linear-gradient(90deg, rgba(40,0,74,1) 0%, rgba(9,0,13,1) 100%)';
-        document.querySelector('h1').style.webkitBackgroundClip = 'text';
-        document.querySelector('h1').style.color = 'transparent';
-
-        document.querySelector('h5').style.background='linear-gradient(90deg, rgba(40,0,74,1) 0%, rgba(9,0,13,1) 100%)';
-        document.querySelector('h5').style.backgroundClip= 'text';
-        document.querySelector('h5').style.color = 'transparent';
-        document.body.style.background='linear-gradient(90deg, rgba(139,0,255,1) 0%, rgba(200,87,255,1) 100%)'
-
-
-    }*/
 }
 checkforbloom()
 function checkforplain(){
@@ -426,9 +406,9 @@ if (localStorage.getItem('isauto')=='false'){
                 try{
 
                     await pyodide.runPythonAsync(`
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
     `)}catch (e) {
                     
                 }
@@ -438,9 +418,9 @@ if (localStorage.getItem('isauto')=='false'){
 def input(prompt_text=""):
     from js import prompt
     return prompt(prompt_text)
-`);
+    `);
 
-                    let result = await pyodide.runPythonAsync(code);
+                    let result = pyodide.runPython(code);
                     console.log(result);
 
                     try {
@@ -450,7 +430,7 @@ buf = io.BytesIO()
 plt.savefig(buf, format="png")
 plt.close()
 base64.b64encode(buf.getvalue()).decode("utf-8")
-`);
+    `);
 
                         const byteCharacters = atob(b64);
                         const byteNumbers = new Array(byteCharacters.length);
@@ -576,7 +556,7 @@ function executecode(){
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-`)
+    `)
             }catch (e) {
                 
             }
@@ -585,11 +565,11 @@ import matplotlib.pyplot as plt
             try{
                 await pyodide.runPythonAsync(`
 def input(prompt_text=""):
-    from js import prompt
-    return prompt(prompt_text)
-`);
+from js import prompt
+return prompt(prompt_text)
+    `);
 
-                let result = await pyodide.runPythonAsync(code);
+                let result = pyodide.runPython(code);
                 console.log(result);
 
                 try {
@@ -599,7 +579,7 @@ buf = io.BytesIO()
 plt.savefig(buf, format="png")
 plt.close()
 base64.b64encode(buf.getvalue()).decode("utf-8")
-`);
+    `);
 
                     const byteCharacters = atob(b64);
                     const byteNumbers = new Array(byteCharacters.length);
@@ -1075,41 +1055,41 @@ if (bg) {
 
     if (bg == '1') {
         css = `
-            .CodeMirror {
-                background-image: url('space.jpg') !important;
-                background-size: cover !important;
-            }
-        `;
+    .CodeMirror {
+    background-image: url('space.jpg') !important;
+    background-size: cover !important;
+}
+`;
     } else if (bg == '2') {
         css = `
-            .CodeMirror {
-                background-image: url('xp.jpg') !important;
-                background-size: cover !important;
-            }
-        `;
+    .CodeMirror {
+    background-image: url('xp.jpg') !important;
+    background-size: cover !important;
+}
+`;
     } else if (bg == '5') {
         css = `
-            .CodeMirror {
-                background-image: url('city.jpg') !important;
-                background-size: cover !important;
-            }
-        `;
+    .CodeMirror {
+    background-image: url('city.jpg') !important;
+    background-size: cover !important;
+}
+`;
     } else if (bg == '4') {
         css = `
-            .CodeMirror {
-                background-image: url('forest.jpg') !important;
-                background-size: cover !important;
-                
-            }
-        `;
+    .CodeMirror {
+    background-image: url('forest.jpg') !important;
+    background-size: cover !important;
+
+}
+`;
     } else if (bg == '6') {
         css = `
-            .CodeMirror {
-                background-image: url('desert.png') !important;
-                background-size: cover !important;
+    .CodeMirror {
+    background-image: url('desert.png') !important;
+    background-size: cover !important;
 
-            }
-        `;
+}
+`;
     }
 
     if (css) {
@@ -1491,3 +1471,7 @@ async function goback() {
 
     await new Promise(resolve => setTimeout(resolve, 1000));
 }
+
+document.querySelector('.notes').addEventListener('click', () => {
+    window.open("notes.html",crypto.randomUUID(),"width=600,height=600");
+})

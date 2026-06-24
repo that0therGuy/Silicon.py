@@ -554,7 +554,7 @@ input[type=number] {
 p{
     margin-right:5px;
 }
-.linesc,.cpos,.scrolltod,.gemini,.read,.efff,.chimport,.roomsbuttondiv,.leaveroomdiv{
+.linesc,.cpos,.scrolltod,.gemini,.read,.efff,.chimport,.roomsbuttondiv,.leaveroomdiv,.notes_div{
     border:2px solid rgb(0, 58, 100);
     padding:4px;
     border-radius:4px;
@@ -566,7 +566,7 @@ p{
 .scrolltod{
     display:none !important;
 }
-.gemini{
+.gemini,.notes_div{
     width:fit-content;
 
 
@@ -598,11 +598,14 @@ p{
 
 
 }
-.gemini,.roomsbuttondiv,.leaveroomdiv{
+.gemini,.roomsbuttondiv,.leaveroomdiv,.notes_div{
     transition: all .5s;
+    text-align: center;
 }
-
-.gemini:hover,.roomsbuttondiv:hover,.leaveroomdiv:hover{
+.notes_div{
+    padding:5px;
+}
+.gemini:hover,.roomsbuttondiv:hover,.leaveroomdiv:hover,.notes_div:hover{
     margin-left:1px;
     margin-right:1px;
     scale:1.06;

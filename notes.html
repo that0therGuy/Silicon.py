@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="icon" href="img.png" type="image/x-icon">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <title>Settings</title>
+    <link rel="stylesheet" href="css.css">
+    <style>
+
+
+        a{
+            margin-bottom: 20px;
+        }
+        a{
+            padding:5px;
+            border:1px solid #264875;
+            border-radius:5px;
+
+        }
+        h1{
+            margin:0;
+        }
+        .roomsChoice{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap:25px;
+
+        }
+        .joinbutton,.createbutton{
+            display:flex;
+            flex-direction: column;
+            gap:5px;
+        }
+        .swal-modal {
+            background: linear-gradient(to top left, rgb(0, 95, 156, .3) 0%, rgb(0, 98, 122, .3) 100%);
+            border: 1px solid #2EA8C7;
+            backdrop-filter: blur(2px);
+            color: cyan;
+            overflow: hidden; /* prevents input from breaking out */
+        }
+
+        .swal-text {
+            color: #2EA8C7;
+            text-align: center;
+            width: 100%;
+            display: block;
+        }
+
+        .swal-content, .swal-footer {
+            display: block !important; /* changed from inline-block to block */
+            margin: 0;
+            text-align: center;
+        }
+
+        .swal-footer {
+            margin-bottom: 35px;
+        }
+
+        .swal-button {
+            background: linear-gradient(90deg, rgba(69, 166, 204, 1) 0%, rgba(0, 117, 128, 1) 100%) !important;
+            text-align: center;
+            margin: 0;
+            height: 30px;
+            padding: 0 20px;
+            color: #033F57;
+        }
+
+        .swal-content__input, .swal-text input {
+            background: linear-gradient(90deg, rgba(69, 166, 204, 1) 0%, rgba(0, 117, 128, 1) 100%);
+            border: none;
+            outline: none;
+            padding: 7px;
+            border-radius: 3px;
+            text-align: center;
+            color: #033F57;
+            caret-color: #033F57;
+            width: 80%;
+            display: block;
+            margin: 0 auto;
+            margin-top:10px;
+
+            height: 30px;
+            box-sizing: border-box;
+        }
+        .notescontainer{
+            display: flex;
+            flex-direction: column;
+            gap:25px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            height:100%;
+        }
+        .notesarea{
+            border: 1px solid #2EA8C7;
+            height:90vh;
+            width:90vw;
+            border-radius: 5px;
+            padding:20px;
+            word-wrap: anywhere;
+            text-align: left;
+            overflow: auto;
+
+
+        }
+        .notesarea:focus{
+            outline:none;
+        }
+        body,html{
+            overflow: hidden !important;
+        }
+
+
+
+
+    </style>
+
+</head>
+<body>
+<div class="notescontainer">
+    <p>Closing the window will lose the notes.</p>
+    <div class="notesarea" contenteditable="true">
+
+    </div>
+</div>
+
+</body>
+<script>
+    if (localStorage.getItem('font')==null){
+
+        localStorage.setItem('font','3')
+    }
+    function checkforfont(){
+
+        if (localStorage.getItem('font')==1){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='space mono'
+            });
+
+
+
+        }else if(localStorage.getItem('font')==2){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='parkinsans'
+            });
+
+        }
+        else if(localStorage.getItem('font')==4){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='lobster'
+            });
+
+        }
+        else if(localStorage.getItem('font')==5){
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='roboto mono'
+            });
+
+        }
+        else{
+            const allElements = document.querySelectorAll('*');
+
+
+            allElements.forEach(element => {
+                element.style.fontFamily='jetbrains mono'
+            });
+
+        }
+    }
+    checkforfont()
+</script>
+</html>
