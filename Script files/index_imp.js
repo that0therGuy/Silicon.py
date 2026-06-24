@@ -1473,5 +1473,5 @@ async function goback() {
 }
 
 document.querySelector('.notes').addEventListener('click', () => {
-    window.open("notes.html",crypto.randomUUID(),"width=600,height=600");
+    window.open("Secondary HTMLs/notes.html",crypto.randomUUID(),"width=600,height=600");
 })
