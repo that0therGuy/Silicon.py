@@ -53,15 +53,15 @@ other on different platforms.
 
 
 **Great Styling**
-![Great Styling](1.png)
+![Great Styling](../Images/1.png)
 
 
 **Great Coding**
-![Great Coding](2.png)
+![Great Coding](../Images/2.png)
 *Using Matplotlib in Silicon.py with Firefox Tab Splitscreen.*
 
 
 **Great Immersion**
-![Great Immersion](3.png)
+![Great Immersion](../Images/3.png)
 
 
